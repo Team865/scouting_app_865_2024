@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const AutoPage());
-}
-
 class AutoPage extends StatelessWidget {
   const AutoPage({super.key});
 
