@@ -17,22 +17,22 @@ class ScoreCounter extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          ElevatedButton.icon(
+          ElevatedButton.icon(//adds button to increment score
             onPressed: () {
               changeValue(-1);
             },
             icon: const Icon(Icons.minimize),
             label: const Text('')
           ),
-          /*SizedBox(
+          SizedBox(
             width: 50,
-            child: TextFormField(controller: scoreCounterController)
-          ),*/
-          Padding(
+            child: TextFormField(controller: scoreCounterController)//adds text field
+          ),
+          /*Padding(
             padding: const EdgeInsets.all(5.0),
             child: Text('$scoreCounter')
-          ),
-          ElevatedButton.icon(
+          ),*/
+          ElevatedButton.icon(//adds button to increment score
             onPressed: () {
               changeValue(1);
             },

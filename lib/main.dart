@@ -45,9 +45,9 @@ class _MainAppState extends State<MainApp> {
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                /*
+                /* 
                 FOR TESTING ONLY
-                
+
                 ScoreCounter(
                   scoreCounter: context.watch<MyAppState>().scoreCounter1,
                     changeValue: context.watch<MyAppState>().changeValue1,
