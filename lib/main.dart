@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:scouting_app_865_2024/compnenets/text-field.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +12,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: CustomTextField(labelText: 'Hello'),
+        bottomNavigationBar: NavigationBar(
+          //insert destinations here
+          destinations: const [
+          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+          NavigationDestination(icon: Icon(Icons.videogame_asset_off), label: 'Auto'),
+          NavigationDestination(icon: Icon(Icons.videogame_asset),label: 'Teleop'),
+          NavigationDestination(icon: Icon(Icons.access_time), label: 'Endgame'),
+          NavigationDestination(icon: Icon(Icons.qr_code), label: 'Submission')
+        ]),
       ),
     );
   }
