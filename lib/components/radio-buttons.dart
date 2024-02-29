@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class radiobutton extends StatefulWidget {
+class RadioButton extends StatefulWidget {
   final String buttons;
-  const radiobutton({Key? key, required this.buttons});
+  const RadioButton({Key? key, required this.buttons});
 
   
 
   @override
-  State<radiobutton> createState() => _MyHomePageState();
+  State<RadioButton> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<radiobutton> {
+class _MyHomePageState extends State<RadioButton> {
   bool? _isChecked = false;
 
   void _incrementCounter() {

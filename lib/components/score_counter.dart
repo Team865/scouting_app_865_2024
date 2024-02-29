@@ -1,11 +1,11 @@
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 class ScoreCounter extends StatelessWidget {
-  int scoreCounter;
-  Function changeValue;
-  TextEditingController scoreCounterController;
+  final int scoreCounter;
+  final Function changeValue;
+  final TextEditingController scoreCounterController;
 
-  ScoreCounter({
+  const ScoreCounter({
     super.key,  
     required this.scoreCounter,
     required this.changeValue,
