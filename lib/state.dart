@@ -28,8 +28,8 @@ class ScoutingAppState extends State<ScoutingApp> {
   static bool autoGroundIntake11 = false;
 
   //text editing controllers
-  static var autoAmpController = TextEditingController();
-  static var autoSpeakerController = TextEditingController();
+  static var autoAmpController = TextEditingController(text:'0');
+  static var autoSpeakerController = TextEditingController(text:'0');
 
   //functions
   static incrementAutoAmp(int incValue) {
