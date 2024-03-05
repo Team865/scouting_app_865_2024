@@ -100,6 +100,9 @@ class _HomePageState extends State<HomePage> {
           text6: 'Red 3',
           buttonValue: ScoutingAppState.robotPosition,
           changeState: updateRobotPosition
+        ),
+        Image.asset(
+          'images/playing_field.jpg'
         )
       ]
     );
