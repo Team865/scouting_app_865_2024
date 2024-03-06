@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:scouting_app_865_2024/components/score_counter.dart';
 import 'package:scouting_app_865_2024/state.dart';
-import 'package:scouting_app_865_2024/components/checkmark-button.dart';
 
 class EndgamePage extends StatefulWidget {
+  const EndgamePage({super.key});
   @override
   State<EndgamePage> createState() => _EndgamePageState();
 }
@@ -18,12 +17,12 @@ class _EndgamePageState extends State<EndgamePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Endgame Page'),
+        title: const Text('Endgame Page'),
       ),
       body: Column(
         children: [
           CheckboxListTile(
-            title: Text('Climb'),
+            title: const Text('Climb'),
             value: ScoutingAppState.climb,
             onChanged: (bool? value) {
               setState(() {
@@ -32,7 +31,7 @@ class _EndgamePageState extends State<EndgamePage> {
             },
           ),
           CheckboxListTile(
-            title: Text('Park'),
+            title: const Text('Park'),
             value: ScoutingAppState.park,
             onChanged: (bool? value) {
               setState(() {
@@ -41,7 +40,7 @@ class _EndgamePageState extends State<EndgamePage> {
             },
           ),
           CheckboxListTile(
-            title: Text('Trap'),
+            title: const Text('Trap'),
             value: ScoutingAppState.trap,
             onChanged: (bool? value) {
               setState(() {

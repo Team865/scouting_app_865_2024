@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:scouting_app_865_2024/main.dart';
 
+import 'package:scouting_app_865_2024/main.dart';
 import 'package:scouting_app_865_2024/pages/auto.dart';
 import 'package:scouting_app_865_2024/pages/endgame.dart';
 import 'package:scouting_app_865_2024/pages/home.dart';
@@ -11,7 +11,11 @@ class ScoutingAppState extends State<ScoutingApp> {
   int pageIndex = 0;
 
 
-  //variables
+  //home
+  static String robotPosition = '';
+
+
+  //auto
   static int autoAmpScored = 0;
   static int autoSpeakerScored = 0;
   static bool? autoMobility = false;
@@ -27,6 +31,11 @@ class ScoutingAppState extends State<ScoutingApp> {
   static bool autoGroundIntake10 = false;
   static bool autoGroundIntake11 = false;
 
+  //endgame
+  static bool climb = false;
+  static bool park = false;
+  static bool trap = false;
+
   //text editing controllers
   static var autoAmpController = TextEditingController(text:'0');
   static var autoSpeakerController = TextEditingController(text:'0');
@@ -34,26 +43,6 @@ class ScoutingAppState extends State<ScoutingApp> {
   static var matchController = TextEditingController();
   static var teamController = TextEditingController();
 
-  //functions
-  static incrementAutoAmp(int incValue) {
-    autoAmpScored += incValue;
-    autoAmpController.text = '$autoAmpScored';
-    UpdateShouldNotify;
-  }
-  static incrementAutoSpeaker(int incValue) {
-    autoSpeakerScored += incValue;
-    autoSpeakerController.text = '$autoSpeakerScored';
-    UpdateShouldNotify;
-  }
-
-
-  //home page variables
-  static String robotPosition = '';
-
- 
-  
-
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -164,9 +153,4 @@ class MyAppState extends ChangeNotifier {
           const SubmissionPage()
         ][pageIndex]);
   }
-
-  
 }*/*/
-
-
-

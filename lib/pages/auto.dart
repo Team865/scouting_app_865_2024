@@ -20,6 +20,23 @@ class _AutoPageState extends State<AutoPage> {
     });
   }
 
+
+  void incrementAutoAmp(int incValue) {
+    setState((){
+    ScoutingAppState.autoAmpScored += incValue;
+    int autoAmpScored = ScoutingAppState.autoAmpScored;
+    ScoutingAppState.autoAmpController.text = '$autoAmpScored';
+    });
+  }
+
+  void incrementAutoSpeaker(int incValue) {
+    setState((){
+    ScoutingAppState.autoSpeakerScored += incValue;
+    int autoSpeakerScored = ScoutingAppState.autoSpeakerScored;
+    ScoutingAppState.autoSpeakerController.text = '$autoSpeakerScored';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,7 +46,7 @@ class _AutoPageState extends State<AutoPage> {
         const SizedBox(height:8),
         ScoreCounter(
           scoreCounter: ScoutingAppState.autoAmpScored,
-          changeValue: ScoutingAppState.incrementAutoAmp,
+          changeValue: incrementAutoAmp,
           scoreCounterController: ScoutingAppState.autoAmpController
         ),
         const SizedBox(height:8),
@@ -37,7 +54,7 @@ class _AutoPageState extends State<AutoPage> {
         const SizedBox(height:8),
         ScoreCounter(
           scoreCounter: ScoutingAppState.autoSpeakerScored,
-          changeValue: ScoutingAppState.incrementAutoSpeaker,
+          changeValue: incrementAutoSpeaker,
           scoreCounterController: ScoutingAppState.autoSpeakerController
         ),
         const SizedBox(height:8),

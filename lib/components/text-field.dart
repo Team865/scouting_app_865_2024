@@ -17,7 +17,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return Column(children: [
       TextFormField(
         decoration: InputDecoration(
-          border: UnderlineInputBorder(),
+          border: const UnderlineInputBorder(),
           labelText: widget.labelText,
         ),
         onChanged: (value) {
