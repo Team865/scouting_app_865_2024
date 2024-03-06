@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class CheckmarkButton extends /*StatefulWidget*/StatelessWidget {
   final bool? isChecked;
   final void Function(bool?)? changeState;
@@ -26,10 +27,12 @@ class CheckmarkButton extends /*StatefulWidget*/StatelessWidget {
               title: Text(checkboxTitle),
               value: isChecked,
               onChanged: changeState,/*(bool? newValue) {
+
                 setState(() {
                   isChecked = newValue;
                 });
               },*/
+
               activeColor: const Color.fromARGB(255, 6, 98, 219),
               checkColor: const Color.fromARGB(255, 255, 255, 255),
               subtitle: Text(checkboxSubtitle),
