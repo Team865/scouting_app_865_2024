@@ -10,8 +10,10 @@ import 'package:scouting_app_865_2024/pages/teleop.dart';
 class ScoutingAppState extends State<ScoutingApp> {
   int pageIndex = 0;
 
+
   //home
   static String robotPosition = '';
+
 
   //auto
   static int autoAmpScored = 0;
@@ -151,6 +153,4 @@ class MyAppState extends ChangeNotifier {
           const SubmissionPage()
         ][pageIndex]);
   }
-
-  
 }*/*/

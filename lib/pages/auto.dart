@@ -20,6 +20,7 @@ class _AutoPageState extends State<AutoPage> {
     });
   }
 
+
   void incrementAutoAmp(int incValue) {
     setState((){
     ScoutingAppState.autoAmpScored += incValue;
@@ -35,6 +36,7 @@ class _AutoPageState extends State<AutoPage> {
     ScoutingAppState.autoSpeakerController.text = '$autoSpeakerScored';
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
