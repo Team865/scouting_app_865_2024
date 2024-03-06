@@ -11,13 +11,48 @@ class ScoutingAppState extends State<ScoutingApp> {
   int pageIndex = 0;
 
 
-  //home page variables
-  static String robotPosition = '';
+  //variables
+  static int autoAmpScored = 0;
+  static int autoSpeakerScored = 0;
+  static bool? autoMobility = false;
+  static bool autoGroundIntake1 = false;
+  static bool autoGroundIntake2 = false;
+  static bool autoGroundIntake3 = false;
+  static bool autoGroundIntake4 = false;
+  static bool autoGroundIntake5 = false;
+  static bool autoGroundIntake6 = false;
+  static bool autoGroundIntake7 = false;
+  static bool autoGroundIntake8 = false;
+  static bool autoGroundIntake9 = false;
+  static bool autoGroundIntake10 = false;
+  static bool autoGroundIntake11 = false;
 
   //text editing controllers
+  static var autoAmpController = TextEditingController(text:'0');
+  static var autoSpeakerController = TextEditingController(text:'0');
   static var nameController = TextEditingController();
   static var matchController = TextEditingController();
   static var teamController = TextEditingController();
+
+  //functions
+  static incrementAutoAmp(int incValue) {
+    autoAmpScored += incValue;
+    autoAmpController.text = '$autoAmpScored';
+    UpdateShouldNotify;
+  }
+  static incrementAutoSpeaker(int incValue) {
+    autoSpeakerScored += incValue;
+    autoSpeakerController.text = '$autoSpeakerScored';
+    UpdateShouldNotify;
+  }
+
+
+  //home page variables
+  static String robotPosition = '';
+
+ 
+  
+
   
   @override
   Widget build(BuildContext context) {
@@ -129,5 +164,9 @@ class MyAppState extends ChangeNotifier {
           const SubmissionPage()
         ][pageIndex]);
   }
-}
-*/
+
+  
+}*/*/
+
+
+
