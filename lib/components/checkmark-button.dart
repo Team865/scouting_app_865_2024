@@ -1,46 +1,43 @@
 import 'package:flutter/material.dart';
 
-
-class CheckmarkButton extends /*StatefulWidget*/StatelessWidget {
+class CheckmarkButton extends /*StatefulWidget*/ StatelessWidget {
   final bool? isChecked;
   final void Function(bool?)? changeState;
   final String checkboxTitle;
-  final String  checkboxSubtitle;
+  final String checkboxSubtitle;
 
-  const CheckmarkButton({
-    super.key,
-    required this.isChecked,
-    required this.changeState,
-    required this.checkboxTitle,
-    required this.checkboxSubtitle
-  });
+  const CheckmarkButton(
+      {super.key,
+      required this.isChecked,
+      required this.changeState,
+      required this.checkboxTitle,
+      required this.checkboxSubtitle});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-          Center(
-            /*child: SizedBox(
+        Center(
+          /*child: SizedBox(
               width: 50,*/
-            child: CheckboxListTile(
-              title: Text(checkboxTitle),
-              value: isChecked,
-              onChanged: changeState,/*(bool? newValue) {
-
+          child: CheckboxListTile(
+            title: Text(checkboxTitle),
+            value: isChecked,
+            onChanged: changeState,
+            /*(bool? newValue) {
                 setState(() {
                   isChecked = newValue;
                 });
               },*/
-
-              activeColor: const Color.fromARGB(255, 6, 98, 219),
-              checkColor: const Color.fromARGB(255, 255, 255, 255),
-              subtitle: Text(checkboxSubtitle),
-              controlAffinity: ListTileControlAffinity.leading,
-            ),
-          /*),*/
+            activeColor: const Color.fromARGB(255, 6, 98, 219),
+            checkColor: const Color.fromARGB(255, 255, 255, 255),
+            subtitle: Text(checkboxSubtitle),
+            controlAffinity: ListTileControlAffinity.leading,
           ),
-        ],
+          /*),*/
+        ),
+      ],
     );
   }
 }
