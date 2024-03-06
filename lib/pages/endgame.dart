@@ -1,11 +1,55 @@
 import 'package:flutter/material.dart';
 
-class EndgamePage extends StatelessWidget {
-  const EndgamePage({super.key});
+import 'package:scouting_app_865_2024/components/score_counter.dart';
+import 'package:scouting_app_865_2024/state.dart';
+import 'package:scouting_app_865_2024/components/checkmark-button.dart';
 
-  // This widget is the root of your application.
+class EndgamePage extends StatefulWidget {
+  @override
+  State<EndgamePage> createState() => _EndgamePageState();
+}
+
+class _EndgamePageState extends State<EndgamePage> {
+  ScoutingAppState state =
+      ScoutingAppState(); // Creating an instance of the state
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Endgame Page'),
+      ),
+      body: Column(
+        children: [
+          CheckboxListTile(
+            title: Text('Climb'),
+            value: ScoutingAppState.climb,
+            onChanged: (bool? value) {
+              setState(() {
+                ScoutingAppState.climb = value!;
+              });
+            },
+          ),
+          CheckboxListTile(
+            title: Text('Park'),
+            value: ScoutingAppState.park,
+            onChanged: (bool? value) {
+              setState(() {
+                ScoutingAppState.park = value!;
+              });
+            },
+          ),
+          CheckboxListTile(
+            title: Text('Trap'),
+            value: ScoutingAppState.trap,
+            onChanged: (bool? value) {
+              setState(() {
+                ScoutingAppState.trap = value!;
+              });
+            },
+          ),
+        ],
+      ),
+    );
   }
 }
