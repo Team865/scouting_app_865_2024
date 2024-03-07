@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:scouting_app_865_2024/state.dart';
-import 'package:scouting_app_865_2024/components/radio-buttons.dart';
+import 'package:scouting_app_865_2024/components/radio_buttons.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

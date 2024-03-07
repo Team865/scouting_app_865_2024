@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scouting_app_865_2024/themes/light_theme.dart';
+import 'package:scouting_app_865_2024/themes.dart';
 import 'package:scouting_app_865_2024/state.dart';
 
 void main() {
