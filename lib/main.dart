@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:scouting_app_865_2024/themes/light_theme.dart';
-import 'package:scouting_app_865_2024/state.dart';
+import 'package:scouting_app_865_2024/util/gsheets.dart';
+import 'package:scouting_app_865_2024/util/themes.dart';
+import 'package:scouting_app_865_2024/util/state.dart';
 
 void main() {
+  GSheetsUtil.init();
+
   runApp(const MyApp());
 }
 

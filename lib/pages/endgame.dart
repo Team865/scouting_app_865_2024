@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:scouting_app_865_2024/state.dart';
+import 'package:scouting_app_865_2024/util/state.dart';
 
 class EndgamePage extends StatefulWidget {
   const EndgamePage({super.key});
@@ -14,7 +14,6 @@ class _EndgamePageState extends State<EndgamePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Endgame Page'),
@@ -51,6 +50,5 @@ class _EndgamePageState extends State<EndgamePage> {
         ],
       ),
     );
-
   }
 }
