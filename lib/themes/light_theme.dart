@@ -7,3 +7,11 @@ ThemeData lightTheme = ThemeData(
   secondary: const Color.fromARGB(255, 63, 114, 175),
   inversePrimary: Colors.grey.shade900,
 ));
+
+ThemeData darkTheme = ThemeData(
+    colorScheme: ColorScheme.light(
+  background: const Color.fromARGB(255, 49, 47, 47),
+  primary: const Color.fromARGB(255, 28, 45, 74),
+  secondary: const Color.fromARGB(255, 63, 114, 175),
+  inversePrimary: Colors.grey.shade900,
+));

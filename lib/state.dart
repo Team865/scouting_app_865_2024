@@ -4,16 +4,14 @@ import 'package:scouting_app_865_2024/main.dart';
 import 'package:scouting_app_865_2024/pages/auto.dart';
 import 'package:scouting_app_865_2024/pages/endgame.dart';
 import 'package:scouting_app_865_2024/pages/home.dart';
-import 'package:scouting_app_865_2024/pages/submission_page.dart';
+import 'package:scouting_app_865_2024/pages/submission.dart';
 import 'package:scouting_app_865_2024/pages/teleop.dart';
 
 class ScoutingAppState extends State<ScoutingApp> {
   int pageIndex = 0;
 
-
   //home
   static String robotPosition = '';
-
 
   //auto
   static int autoAmpScored = 0;
@@ -37,8 +35,8 @@ class ScoutingAppState extends State<ScoutingApp> {
   static bool trap = false;
 
   //text editing controllers
-  static var autoAmpController = TextEditingController(text:'0');
-  static var autoSpeakerController = TextEditingController(text:'0');
+  static var autoAmpController = TextEditingController(text: '0');
+  static var autoSpeakerController = TextEditingController(text: '0');
   static var nameController = TextEditingController();
   static var matchController = TextEditingController();
   static var teamController = TextEditingController();
@@ -46,29 +44,61 @@ class ScoutingAppState extends State<ScoutingApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: pageIndex,
-        onDestinationSelected: (int index) {
-          setState(() {
-            pageIndex = index;
-          });
-        },
-        destinations: const [
-        NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-        NavigationDestination(icon: Icon(Icons.videogame_asset_off), label: 'Auto'),
-        NavigationDestination(icon: Icon(Icons.videogame_asset),label: 'Teleop'),
-        NavigationDestination(icon: Icon(Icons.access_time), label: 'Endgame'),
-        NavigationDestination(icon: Icon(Icons.qr_code), label: 'Submission')
-      ]),
+        bottomNavigationBar: NavigationBar(
+            selectedIndex: pageIndex,
+            onDestinationSelected: (int index) {
+              setState(() {
+                pageIndex = index;
+              });
+            },
+            destinations: const [
+              NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+              NavigationDestination(
+                  icon: Icon(Icons.videogame_asset_off), label: 'Auto'),
+              NavigationDestination(
+                  icon: Icon(Icons.videogame_asset), label: 'Teleop'),
+              NavigationDestination(
+                  icon: Icon(Icons.access_time), label: 'Endgame'),
+              NavigationDestination(
+                  icon: Icon(Icons.qr_code), label: 'Submission')
+            ]),
+        body: <Widget>[
+          const HomePage(),
+          const AutoPage(),
+          const TeleopPage(),
+          const EndgamePage(),
+          const SubmissionPage()
+        ][pageIndex]);
+  }
 
-      body: <Widget>[
-        const HomePage(),
-        const AutoPage(),
-        const TeleopPage(),
-        const EndgamePage(),
-        const SubmissionPage()
-      ][pageIndex]
-    );
+  List<String> getData() {
+    List<String> data = [
+      robotPosition,
+      autoAmpScored.toString(),
+      autoSpeakerScored.toString(),
+      autoMobility.toString(),
+      autoGroundIntake1.toString(),
+      autoGroundIntake2.toString(),
+      autoGroundIntake3.toString(),
+      autoGroundIntake4.toString(),
+      autoGroundIntake5.toString(),
+      autoGroundIntake6.toString(),
+      autoGroundIntake7.toString(),
+      autoGroundIntake8.toString(),
+      autoGroundIntake9.toString(),
+      autoGroundIntake10.toString(),
+      autoGroundIntake11.toString(),
+      climb.toString(),
+      park.toString(),
+      trap.toString(),
+      autoAmpController.text,
+      autoSpeakerController.text,
+      nameController.text,
+      matchController.text,
+      teamController.text,
+    ];
+    print(data);
+    return data;
   }
 }
 

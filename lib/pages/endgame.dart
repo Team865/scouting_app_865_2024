@@ -14,7 +14,6 @@ class _EndgamePageState extends State<EndgamePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Endgame Page'),
@@ -51,6 +50,5 @@ class _EndgamePageState extends State<EndgamePage> {
         ],
       ),
     );
-
   }
 }
