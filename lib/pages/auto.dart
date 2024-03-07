@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:scouting_app_865_2024/components/score_counter.dart';
-import 'package:scouting_app_865_2024/state.dart';
+import 'package:scouting_app_865_2024/util/state.dart';
 import 'package:scouting_app_865_2024/components/checkmark_button.dart';
 import 'package:scouting_app_865_2024/components/ground_intake_button.dart';
 

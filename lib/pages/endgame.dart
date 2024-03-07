@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:scouting_app_865_2024/state.dart';
+import 'package:scouting_app_865_2024/util/state.dart';
 
 class EndgamePage extends StatefulWidget {
   const EndgamePage({super.key});

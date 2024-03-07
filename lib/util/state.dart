@@ -71,33 +71,48 @@ class ScoutingAppState extends State<ScoutingApp> {
         ][pageIndex]);
   }
 
-  List<String> getData() {
-    List<String> data = [
+  static int boolToInt(bool value) {
+    return value ? 1 : 0;
+  }
+
+  static List<dynamic> getData() {
+    List<dynamic> data = [
       robotPosition,
-      autoAmpScored.toString(),
-      autoSpeakerScored.toString(),
-      autoMobility.toString(),
-      autoGroundIntake1.toString(),
-      autoGroundIntake2.toString(),
-      autoGroundIntake3.toString(),
-      autoGroundIntake4.toString(),
-      autoGroundIntake5.toString(),
-      autoGroundIntake6.toString(),
-      autoGroundIntake7.toString(),
-      autoGroundIntake8.toString(),
-      autoGroundIntake9.toString(),
-      autoGroundIntake10.toString(),
-      autoGroundIntake11.toString(),
-      climb.toString(),
-      park.toString(),
-      trap.toString(),
+      autoAmpScored,
+      autoSpeakerScored,
+      autoMobility,
+      // TODO: make this less ugly
+      boolToInt(autoGroundIntake1) +
+      boolToInt(autoGroundIntake2) +
+      boolToInt(autoGroundIntake3) +
+      boolToInt(autoGroundIntake4) +
+      boolToInt(autoGroundIntake5) +
+      boolToInt(autoGroundIntake6) +
+      boolToInt(autoGroundIntake7) +
+      boolToInt(autoGroundIntake8) +
+      boolToInt(autoGroundIntake9) +
+      boolToInt(autoGroundIntake10) +
+      boolToInt(autoGroundIntake11),
+      autoGroundIntake1,
+      autoGroundIntake2,
+      autoGroundIntake3,
+      autoGroundIntake4,
+      autoGroundIntake5,
+      autoGroundIntake6,
+      autoGroundIntake7,
+      autoGroundIntake8,
+      autoGroundIntake9,
+      autoGroundIntake10,
+      autoGroundIntake11,
+      climb,
+      park,
+      trap,
       autoAmpController.text,
       autoSpeakerController.text,
       nameController.text,
       matchController.text,
       teamController.text,
     ];
-    print(data);
     return data;
   }
 }

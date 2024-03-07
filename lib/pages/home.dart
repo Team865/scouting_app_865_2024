@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:scouting_app_865_2024/state.dart';
+import 'package:scouting_app_865_2024/util/state.dart';
 import 'package:scouting_app_865_2024/components/radio_buttons.dart';
 
 class HomePage extends StatefulWidget {
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                         width: 50,
                         child: TextFormField(
-                            controller: ScoutingAppState.teamController))
+                            controller: ScoutingAppState.teamController, keyboardType: TextInputType.number))
                   ]),
               const SizedBox(width: 50),
               Column(
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                         width: 50,
                         child: TextFormField(
-                            controller: ScoutingAppState.matchController))
+                            controller: ScoutingAppState.matchController, keyboardType: TextInputType.number))
                   ]),
             ],
           ),
