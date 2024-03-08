@@ -81,7 +81,7 @@ class _AutoPageState extends State<AutoPage> {
                   checkboxTitle: 'Mobility',
                   checkboxSubtitle: '')),
           const SizedBox(height: 8)
-        ]),,
+        ]),
         //ground intake grid (everything below this point)
         const Text('Ground Intake'),
         const SizedBox(height: 8),
