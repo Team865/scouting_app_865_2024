@@ -10,7 +10,7 @@ import 'package:scouting_app_865_2024/pages/teleop.dart';
 class ScoutingAppState extends State<ScoutingApp> {
   int pageIndex = 0;
 
-  //home
+  //home          t
   static String robotPosition = '';
 
   //auto
@@ -29,6 +29,22 @@ class ScoutingAppState extends State<ScoutingApp> {
   static bool autoGroundIntake10 = false;
   static bool autoGroundIntake11 = false;
 
+  //teleop
+  static int teleopAmpScored = 0;
+  static int teleopSpeakerScored = 0;
+  static bool? teleopDefense = false;
+  static bool teleopGroundIntake1 = false;
+  static bool teleopGroundIntake2 = false;
+  static bool teleopGroundIntake3 = false;
+  static bool teleopGroundIntake4 = false;
+  static bool teleopGroundIntake5 = false;
+  static bool teleopGroundIntake6 = false;
+  static bool teleopGroundIntake7 = false;
+  static bool teleopGroundIntake8 = false;
+  static bool teleopGroundIntake9 = false;
+  static bool teleopGroundIntake10 = false;
+  static bool teleopGroundIntake11 = false;
+
   //endgame
   static bool climb = false;
   static bool park = false;
@@ -37,6 +53,8 @@ class ScoutingAppState extends State<ScoutingApp> {
   //text editing controllers
   static var autoAmpController = TextEditingController(text: '0');
   static var autoSpeakerController = TextEditingController(text: '0');
+  static var teleopAmpController = TextEditingController(text: '0');
+  static var teleopSpeakerController = TextEditingController(text: '0');
   static var nameController = TextEditingController();
   static var matchController = TextEditingController();
   static var teamController = TextEditingController();
@@ -75,43 +93,53 @@ class ScoutingAppState extends State<ScoutingApp> {
     return value ? 1 : 0;
   }
 
+  static int boolsToInt(List<bool> values) {
+    int intValue = 0;
+    values.forEach((value) => intValue += boolToInt(value));
+    return intValue;
+  }
+
   static List<dynamic> getData() {
     List<dynamic> data = [
+      nameController.text,
+      matchController.text,
+      teamController.text,
       robotPosition,
       autoAmpScored,
       autoSpeakerScored,
       autoMobility,
-      // TODO: make this less ugly
-      boolToInt(autoGroundIntake1) +
-      boolToInt(autoGroundIntake2) +
-      boolToInt(autoGroundIntake3) +
-      boolToInt(autoGroundIntake4) +
-      boolToInt(autoGroundIntake5) +
-      boolToInt(autoGroundIntake6) +
-      boolToInt(autoGroundIntake7) +
-      boolToInt(autoGroundIntake8) +
-      boolToInt(autoGroundIntake9) +
-      boolToInt(autoGroundIntake10) +
-      boolToInt(autoGroundIntake11),
-      autoGroundIntake1,
-      autoGroundIntake2,
-      autoGroundIntake3,
-      autoGroundIntake4,
-      autoGroundIntake5,
-      autoGroundIntake6,
-      autoGroundIntake7,
-      autoGroundIntake8,
-      autoGroundIntake9,
-      autoGroundIntake10,
-      autoGroundIntake11,
+      boolsToInt([
+        autoGroundIntake1,
+        autoGroundIntake2,
+        autoGroundIntake3,
+        autoGroundIntake4,
+        autoGroundIntake5,
+        autoGroundIntake6,
+        autoGroundIntake7,
+        autoGroundIntake8,
+        autoGroundIntake9,
+        autoGroundIntake10,
+        autoGroundIntake11
+      ]),
+      teleopAmpScored,
+      teleopSpeakerScored,
+      teleopDefense,
+      boolsToInt([
+        teleopGroundIntake1,
+        teleopGroundIntake2,
+        teleopGroundIntake3,
+        teleopGroundIntake4,
+        teleopGroundIntake5,
+        teleopGroundIntake6,
+        teleopGroundIntake7,
+        teleopGroundIntake8,
+        teleopGroundIntake9,
+        teleopGroundIntake10,
+        teleopGroundIntake11
+      ]),
       climb,
       park,
       trap,
-      autoAmpController.text,
-      autoSpeakerController.text,
-      nameController.text,
-      matchController.text,
-      teamController.text,
     ];
     return data;
   }
