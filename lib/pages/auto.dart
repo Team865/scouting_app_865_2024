@@ -22,17 +22,21 @@ class _AutoPageState extends State<AutoPage> {
 
   void incrementAutoAmp(int incValue) {
     setState(() {
-      ScoutingAppState.autoAmpScored += incValue;
-      int autoAmpScored = ScoutingAppState.autoAmpScored;
-      ScoutingAppState.autoAmpController.text = '$autoAmpScored';
+      // avoid negatives
+      if (incValue > 1 || ScoutingAppState.autoAmpScored > 0) {
+        ScoutingAppState.autoAmpScored += incValue;
+        ScoutingAppState.autoAmpController.text = ScoutingAppState.autoAmpScored.toString();
+      }
     });
   }
 
   void incrementAutoSpeaker(int incValue) {
     setState(() {
-      ScoutingAppState.autoSpeakerScored += incValue;
-      int autoSpeakerScored = ScoutingAppState.autoSpeakerScored;
-      ScoutingAppState.autoSpeakerController.text = '$autoSpeakerScored';
+      // avoid negatives
+      if (incValue > 1 || ScoutingAppState.autoSpeakerScored > 0) {
+        ScoutingAppState.autoSpeakerScored += incValue;
+        ScoutingAppState.autoSpeakerController.text = ScoutingAppState.autoSpeakerScored.toString();
+      }
     });
   }
 
@@ -68,12 +72,16 @@ class _AutoPageState extends State<AutoPage> {
           },
         ),
         const SizedBox(height: 8),
-        CheckmarkButton(
-            isChecked: ScoutingAppState.autoMobility,
-            changeState: changeAutoMobility,
-            checkboxTitle: 'Mobility',
-            checkboxSubtitle: ''),
-        const SizedBox(height: 8),
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+          Container(
+              width: 200,
+              child: CheckmarkButton(
+                  isChecked: ScoutingAppState.autoMobility,
+                  changeState: changeAutoMobility,
+                  checkboxTitle: 'Mobility',
+                  checkboxSubtitle: '')),
+          const SizedBox(height: 8)
+        ]),,
         //ground intake grid (everything below this point)
         const Text('Ground Intake'),
         const SizedBox(height: 8),
