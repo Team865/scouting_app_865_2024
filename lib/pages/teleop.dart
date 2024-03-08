@@ -17,23 +17,39 @@ class TeleopPage extends StatefulWidget {
 class _TeleopPageState extends State<TeleopPage> {
   void changeTeleopDefense(bool? newValue) {
     setState(() {
-      ScoutingAppState.teleopDefense = newValue;
+      ScoutingAppState.teleopDefense = newValue!;
     });
   }
 
   void incrementTeleopAmp(int incValue) {
     setState(() {
+      if (ScoutingAppState.teleopAmpScored <= 0 && incValue < 0) {
+        ScoutingAppState.teleopAmpScored = 0;
+        return;
+      }
       ScoutingAppState.teleopAmpScored += incValue;
-      int teleopAmpScored = ScoutingAppState.teleopAmpScored;
-      ScoutingAppState.teleopAmpController.text = '$teleopAmpScored';
     });
   }
 
   void incrementTeleopSpeaker(int incValue) {
     setState(() {
+      if (ScoutingAppState.teleopSpeakerScored <= 0 && incValue < 0) {
+        ScoutingAppState.teleopSpeakerScored = 0;
+        return;
+      }
       ScoutingAppState.teleopSpeakerScored += incValue;
-      int teleopSpeakerScored = ScoutingAppState.teleopSpeakerScored;
-      ScoutingAppState.teleopSpeakerController.text = '$teleopSpeakerScored';
+    });
+  }
+
+  void changeTechFoul(bool? newValue) {
+    setState(() {
+      ScoutingAppState.techFoul = newValue!;
+    });
+  }
+
+  void changeFoul(bool? newValue) {
+    setState(() {
+      ScoutingAppState.foul = newValue!;
     });
   }
 
@@ -41,50 +57,27 @@ class _TeleopPageState extends State<TeleopPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-            'Teleop',
-            style: TextStyle(color: Colors.white),
-          ),
-          centerTitle: true,
-          backgroundColor: lightTheme.colorScheme.primary,
-        ),
+            title: Text(
+              'Teleop',
+              style: TextStyle(color: Colors.white),
+            ),
+            centerTitle: true,
+            backgroundColor: lightTheme.colorScheme.primary),
         body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text('Amp:'),
               const SizedBox(height: 8),
               ScoreCounter(
-                  scoreCounter: ScoutingAppState.teleopAmpScored,
-                  changeValue: incrementTeleopAmp,
-                  scoreCounterController: ScoutingAppState.teleopAmpController),
+                scoreCounter: ScoutingAppState.teleopAmpScored,
+                changeValue: incrementTeleopAmp,
+              ),
               const SizedBox(height: 8),
               const Text('Speaker'),
               const SizedBox(height: 8),
               ScoreCounter(
-                  scoreCounter: ScoutingAppState.teleopSpeakerScored,
-                  changeValue: incrementTeleopSpeaker,
-                  scoreCounterController:
-                      ScoutingAppState.teleopSpeakerController),
-              const SizedBox(height: 8),
-              const Text('Fouls'),
-              const SizedBox(height: 8),
-              ScoreCounter(
-                  scoreCounter: ScoutingAppState.teleopSpeakerScored,
-                  changeValue: incrementTeleopSpeaker,
-                  scoreCounterController:
-                      ScoutingAppState.teleopSpeakerController),
-              const SizedBox(height: 8),
-              ElevatedButton(
-                //when pressed, updates the value for the teleop amp and speaker variables to match the text
-                //used when the number is changed by typing rather then with the buttons
-                //this would also be useful to add for other uses of the score counter widget
-                child: const Text('Sync typed entries for teleop'),
-                onPressed: () {
-                  ScoutingAppState.teleopAmpScored =
-                      int.parse(ScoutingAppState.teleopAmpController.text);
-                  ScoutingAppState.teleopSpeakerScored =
-                      int.parse(ScoutingAppState.teleopSpeakerController.text);
-                },
+                scoreCounter: ScoutingAppState.teleopSpeakerScored,
+                changeValue: incrementTeleopSpeaker,
               ),
               const SizedBox(height: 8),
               Row(
@@ -105,9 +98,9 @@ class _TeleopPageState extends State<TeleopPage> {
                     Container(
                         width: 200,
                         child: CheckmarkButton(
-                            isChecked: ScoutingAppState.foul,
-                            changeState: changeTeleopDefense,
-                            checkboxTitle: 'Foul',
+                            isChecked: ScoutingAppState.techFoul,
+                            changeState: changeTechFoul,
+                            checkboxTitle: 'Tech foul',
                             checkboxSubtitle: '')),
                     const SizedBox(height: 8)
                   ]),
@@ -117,9 +110,9 @@ class _TeleopPageState extends State<TeleopPage> {
                     Container(
                         width: 200,
                         child: CheckmarkButton(
-                            isChecked: ScoutingAppState.techFoul,
-                            changeState: changeTeleopDefense,
-                            checkboxTitle: 'Tech Foul',
+                            isChecked: ScoutingAppState.foul,
+                            changeState: changeFoul,
+                            checkboxTitle: 'Foul',
                             checkboxSubtitle: '')),
                     const SizedBox(height: 8)
                   ]),

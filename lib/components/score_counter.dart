@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 class ScoreCounter extends StatelessWidget {
   final int scoreCounter;
   final Function changeValue;
-  final TextEditingController scoreCounterController;
 
   const ScoreCounter({
     super.key,  
     required this.scoreCounter,
     required this.changeValue,
-    required this.scoreCounterController
     });  
 
   @override
@@ -24,10 +22,7 @@ class ScoreCounter extends StatelessWidget {
             icon: const Icon(Icons.minimize),
             label: const Text('')
           ),
-          SizedBox(
-            width: 50,
-            child: TextFormField(controller: scoreCounterController)//adds text field
-          ),
+          Text(this.scoreCounter.toString()),
           /*Padding(
             padding: const EdgeInsets.all(5.0),
             child: Text('$scoreCounter')

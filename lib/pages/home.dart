@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
           return AlertDialog(
               title: const Text('Confirm'),
               content: const Text(
-                  'Are you sure you want to change the robot position?'),
+                  'Are you sure you want to change the robot position? This will clear all data except your name.'),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> {
 
                       if (isConfirmed) {
                         setState(() {
+                          ScoutingAppState.reset(true);
                           ScoutingAppState.robotPosition = newValue!;
                         });
                       }

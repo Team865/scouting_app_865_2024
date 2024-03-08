@@ -17,29 +17,27 @@ class AutoPage extends StatefulWidget {
 class _AutoPageState extends State<AutoPage> {
   void changeAutoMobility(bool? newValue) {
     setState(() {
-      ScoutingAppState.autoMobility = newValue;
+      ScoutingAppState.autoMobility = newValue!;
     });
   }
 
   void incrementAutoAmp(int incValue) {
     setState(() {
-      // avoid negatives
-      if (incValue > 1 || ScoutingAppState.autoAmpScored > 0) {
-        ScoutingAppState.autoAmpScored += incValue;
-        ScoutingAppState.autoAmpController.text =
-            ScoutingAppState.autoAmpScored.toString();
+      if (ScoutingAppState.autoAmpScored <= 0 && incValue < 0) {
+        ScoutingAppState.autoAmpScored = 0;
+        return;
       }
+      ScoutingAppState.autoAmpScored += incValue;
     });
   }
 
   void incrementAutoSpeaker(int incValue) {
     setState(() {
-      // avoid negatives
-      if (incValue > 1 || ScoutingAppState.autoSpeakerScored > 0) {
-        ScoutingAppState.autoSpeakerScored += incValue;
-        ScoutingAppState.autoSpeakerController.text =
-            ScoutingAppState.autoSpeakerScored.toString();
+      if (ScoutingAppState.autoSpeakerScored <= 0 && incValue < 0) {
+        ScoutingAppState.autoSpeakerScored = 0;
+        return;
       }
+      ScoutingAppState.autoSpeakerScored += incValue;
     });
   }
 
@@ -61,28 +59,13 @@ class _AutoPageState extends State<AutoPage> {
             const SizedBox(height: 8),
             ScoreCounter(
                 scoreCounter: ScoutingAppState.autoAmpScored,
-                changeValue: incrementAutoAmp,
-                scoreCounterController: ScoutingAppState.autoAmpController),
+                changeValue: incrementAutoAmp),
             const SizedBox(height: 8),
             const Text('Speaker'),
             const SizedBox(height: 8),
             ScoreCounter(
                 scoreCounter: ScoutingAppState.autoSpeakerScored,
-                changeValue: incrementAutoSpeaker,
-                scoreCounterController: ScoutingAppState.autoSpeakerController),
-            const SizedBox(height: 8),
-            ElevatedButton(
-              //when pressed, updates the value for the auto amp and speaker variables to match the text
-              //used when the number is changed by typing rather then with the buttons
-              //this would also be useful to add for other uses of the score counter widget
-              child: const Text('Sync typed entries for auto'),
-              onPressed: () {
-                ScoutingAppState.autoAmpScored =
-                    int.parse(ScoutingAppState.autoAmpController.text);
-                ScoutingAppState.autoSpeakerScored =
-                    int.parse(ScoutingAppState.autoSpeakerController.text);
-              },
-            ),
+                changeValue: incrementAutoSpeaker),
             const SizedBox(height: 8),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
               Container(

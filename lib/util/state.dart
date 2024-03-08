@@ -10,13 +10,19 @@ import 'package:scouting_app_865_2024/pages/teleop.dart';
 class ScoutingAppState extends State<ScoutingApp> {
   int pageIndex = 0;
 
-  //home          t
+  //text editing controllers
+  static var nameController = TextEditingController();
+  static var matchController = TextEditingController();
+  static var teamController = TextEditingController();
+  static var commentsController = TextEditingController();
+
+  //home
   static String robotPosition = '';
 
   //auto
   static int autoAmpScored = 0;
   static int autoSpeakerScored = 0;
-  static bool? autoMobility = false;
+  static bool autoMobility = false;
   static bool autoGroundIntake1 = false;
   static bool autoGroundIntake2 = false;
   static bool autoGroundIntake3 = false;
@@ -32,7 +38,7 @@ class ScoutingAppState extends State<ScoutingApp> {
   //teleop
   static int teleopAmpScored = 0;
   static int teleopSpeakerScored = 0;
-  static bool? teleopDefense = false;
+  static bool teleopDefense = false;
   static bool teleopGroundIntake1 = false;
   static bool teleopGroundIntake2 = false;
   static bool teleopGroundIntake3 = false;
@@ -50,16 +56,6 @@ class ScoutingAppState extends State<ScoutingApp> {
   static bool climb = false;
   static bool park = false;
   static bool trap = false;
-
-  //text editing controllers
-  static var autoAmpController = TextEditingController(text: '0');
-  static var autoSpeakerController = TextEditingController(text: '0');
-  static var teleopAmpController = TextEditingController(text: '0');
-  static var teleopSpeakerController = TextEditingController(text: '0');
-  static var nameController = TextEditingController();
-  static var matchController = TextEditingController();
-  static var teamController = TextEditingController();
-  static var commentsController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -101,11 +97,65 @@ class ScoutingAppState extends State<ScoutingApp> {
     return intValue;
   }
 
+  static String sterilize(String value) {
+    return value.replaceAll(RegExp(r"[=\(\)\\;]"),
+        "_"); // no valid string a person would enter should need these
+  }
+
+  static void reset(bool keepName) {
+    if (!keepName) {
+      nameController.clear();
+    }
+
+    matchController.clear();
+    teamController.clear();
+    commentsController.clear();
+
+    robotPosition = '';
+
+    autoAmpScored = 0;
+    autoSpeakerScored = 0;
+    autoMobility = false;
+    autoGroundIntake1 = false;
+    autoGroundIntake2 = false;
+    autoGroundIntake3 = false;
+    autoGroundIntake4 = false;
+    autoGroundIntake5 = false;
+    autoGroundIntake6 = false;
+    autoGroundIntake7 = false;
+    autoGroundIntake8 = false;
+    autoGroundIntake9 = false;
+    autoGroundIntake10 = false;
+    autoGroundIntake11 = false;
+
+    teleopAmpScored = 0;
+    teleopSpeakerScored = 0;
+    teleopDefense = false;
+    teleopGroundIntake1 = false;
+    teleopGroundIntake2 = false;
+    teleopGroundIntake3 = false;
+    teleopGroundIntake4 = false;
+    teleopGroundIntake5 = false;
+    teleopGroundIntake6 = false;
+    teleopGroundIntake7 = false;
+    teleopGroundIntake8 = false;
+    teleopGroundIntake9 = false;
+    teleopGroundIntake10 = false;
+    teleopGroundIntake11 = false;
+    techFoul = false;
+    foul = false;
+
+    climb = false;
+    park = false;
+    trap = false;
+  }
+
   static List<dynamic> getData() {
     List<dynamic> data = [
-      nameController.text,
-      matchController.text,
-      teamController.text,
+      nameController,
+      matchController,
+      teamController,
+      commentsController,
       robotPosition,
       autoAmpScored,
       autoSpeakerScored,
@@ -139,10 +189,27 @@ class ScoutingAppState extends State<ScoutingApp> {
         teleopGroundIntake10,
         teleopGroundIntake11
       ]),
+      techFoul,
+      foul,
       climb,
       park,
       trap,
     ];
+
+    // make all text fields strings and sterilize them
+    int index;
+    while ((index =
+            data.indexWhere((element) => element is TextEditingController)) !=
+        -1) {
+      if (data[index] is TextEditingController) {
+        data[index] = sterilize((data[index] as TextEditingController).text);
+      } else {
+        data[index] = sterilize(data[index].toString());
+      }
+    }
+
+    print("Sending data ${data}");
+
     return data;
   }
 }

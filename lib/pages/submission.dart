@@ -3,8 +3,43 @@ import 'package:scouting_app_865_2024/util/gsheets.dart';
 import 'package:scouting_app_865_2024/util/state.dart';
 import 'package:scouting_app_865_2024/util/themes.dart';
 
-class SubmissionPage extends StatelessWidget {
+class SubmissionPage extends StatefulWidget {
   const SubmissionPage({super.key});
+
+  @override
+  State<SubmissionPage> createState() => _SubmissionState();
+}
+
+class _SubmissionState extends State<SubmissionPage> {
+  void sendData() {
+    bool isConfirmed = false;
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: const Text('Confirm'),
+              content: const Text(
+                  'Are you sure you want to send the data?'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'Cancel'),
+                  child: const Text('Cancel'),
+                ),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, 'OK');
+                      setState(() {
+                        isConfirmed = true;
+                      });
+
+                      if (isConfirmed) {
+                        GSheetsUtil.addRow(ScoutingAppState.getData());
+                      }
+                    },
+                    child: const Text('OK'))
+              ]);
+        });
+  }
 
   // This widget is the root of your application.
   @override
@@ -32,7 +67,7 @@ class SubmissionPage extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 30.0),
                 child: ElevatedButton(
                     onPressed: () {
-                      GSheetsUtil.addRow(ScoutingAppState.getData());
+                      sendData();
                     },
                     child: const Text("Send Data")),
               ),
