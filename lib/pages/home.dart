@@ -69,7 +69,8 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                         width: 50,
                         child: TextFormField(
-                            controller: ScoutingAppState.teamController, keyboardType: TextInputType.number))
+                            controller: ScoutingAppState.teamController,
+                            keyboardType: TextInputType.number))
                   ]),
               const SizedBox(width: 50),
               Column(
@@ -79,22 +80,27 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                         width: 50,
                         child: TextFormField(
-                            controller: ScoutingAppState.matchController, keyboardType: TextInputType.number))
+                            controller: ScoutingAppState.matchController,
+                            keyboardType: TextInputType.number))
                   ]),
             ],
           ),
           const SizedBox(height: 8),
           const Text('Robot Position'),
           const SizedBox(height: 8),
-          RadioButton(
-              text1: 'Blue 1',
-              text2: 'Red 1',
-              text3: 'Blue 2',
-              text4: 'Red 2',
-              text5: 'Blue 3',
-              text6: 'Red 3',
-              buttonValue: ScoutingAppState.robotPosition,
-              changeState: updateRobotPosition),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            Container(
+                width: 200,
+                child: RadioButton(
+                    text1: 'Blue 1',
+                    text2: 'Red 1',
+                    text3: 'Blue 2',
+                    text4: 'Red 2',
+                    text5: 'Blue 3',
+                    text6: 'Red 3',
+                    buttonValue: ScoutingAppState.robotPosition,
+                    changeState: updateRobotPosition))
+          ]),
           Image.asset('images/playing_field.jpg')
         ]);
   }

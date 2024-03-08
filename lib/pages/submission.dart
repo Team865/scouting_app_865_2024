@@ -9,12 +9,17 @@ class SubmissionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        ElevatedButton(onPressed: () {
-          GSheetsUtil.addRow(ScoutingAppState.getData());
-        }, child: const Text("Send Data"))
-      ]
-    );
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            Container(
+                width: 200,
+                child: ElevatedButton(
+                    onPressed: () {
+                      var succeeded = GSheetsUtil.addRow(ScoutingAppState.getData());
+                    },
+                    child: const Text("Send Data")))
+          ])
+        ]);
   }
 }
