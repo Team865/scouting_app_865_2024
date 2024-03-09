@@ -98,7 +98,7 @@ class ScoutingAppState extends State<ScoutingApp> {
   }
 
   static String sterilize(String value) {
-    return value.replaceAll(RegExp(r"[=\(\)\\;]"),
+    return value.replaceAll(RegExp(r"[=\(\)\\;\{\}]"),
         "_"); // no valid string a person would enter should need these
   }
 
