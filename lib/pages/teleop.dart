@@ -66,7 +66,7 @@ class _TeleopPageState extends State<TeleopPage> {
         body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text('Amp:'),
+              const Text('Amp'),
               const SizedBox(height: 8),
               ScoreCounter(
                 scoreCounter: ScoutingAppState.teleopAmpScored,

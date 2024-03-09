@@ -26,32 +26,41 @@ class _EndgamePageState extends State<EndgamePage> {
       ),
       body: Column(
         children: [
-          CheckboxListTile(
-            title: const Text('Climb'),
-            value: ScoutingAppState.climb,
-            onChanged: (bool? value) {
-              setState(() {
-                ScoutingAppState.climb = value!;
-              });
-            },
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: CheckboxListTile(
+              title: const Text('Climb'),
+              value: ScoutingAppState.climb,
+              onChanged: (bool? value) {
+                setState(() {
+                  ScoutingAppState.climb = value!;
+                });
+              },
+            ),
           ),
-          CheckboxListTile(
-            title: const Text('Park'),
-            value: ScoutingAppState.park,
-            onChanged: (bool? value) {
-              setState(() {
-                ScoutingAppState.park = value!;
-              });
-            },
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: CheckboxListTile(
+              title: const Text('Park'),
+              value: ScoutingAppState.park,
+              onChanged: (bool? value) {
+                setState(() {
+                  ScoutingAppState.park = value!;
+                });
+              },
+            ),
           ),
-          CheckboxListTile(
-            title: const Text('Trap'),
-            value: ScoutingAppState.trap,
-            onChanged: (bool? value) {
-              setState(() {
-                ScoutingAppState.trap = value!;
-              });
-            },
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: CheckboxListTile(
+              title: const Text('Trap'),
+              value: ScoutingAppState.trap,
+              onChanged: (bool? value) {
+                setState(() {
+                  ScoutingAppState.trap = value!;
+                });
+              },
+            ),
           ),
         ],
       ),
