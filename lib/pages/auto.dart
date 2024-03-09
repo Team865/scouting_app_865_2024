@@ -52,7 +52,7 @@ class _AutoPageState extends State<AutoPage> {
           centerTitle: true,
           backgroundColor: lightTheme.colorScheme.primary,
         ),
-        body: Column(
+        body: SingleChildScrollView(child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text('Amp'),
@@ -144,6 +144,6 @@ class _AutoPageState extends State<AutoPage> {
                       () => ScoutingAppState.autoGroundIntake11 = newValue)),
             ),
           ],
-        ));
+        )));
   }
 }

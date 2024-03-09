@@ -63,7 +63,7 @@ class _TeleopPageState extends State<TeleopPage> {
             ),
             centerTitle: true,
             backgroundColor: lightTheme.colorScheme.primary),
-        body: Column(
+        body: SingleChildScrollView(child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text('Amp'),
@@ -90,7 +90,6 @@ class _TeleopPageState extends State<TeleopPage> {
                             changeState: changeTeleopDefense,
                             checkboxTitle: 'Defense',
                             checkboxSubtitle: '')),
-                    const SizedBox(height: 8)
                   ]),
               Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -102,7 +101,6 @@ class _TeleopPageState extends State<TeleopPage> {
                             changeState: changeTechFoul,
                             checkboxTitle: 'Tech foul',
                             checkboxSubtitle: '')),
-                    const SizedBox(height: 8)
                   ]),
               Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -114,8 +112,79 @@ class _TeleopPageState extends State<TeleopPage> {
                             changeState: changeFoul,
                             checkboxTitle: 'Foul',
                             checkboxSubtitle: '')),
-                    const SizedBox(height: 8)
                   ]),
-            ]));
+              //ground intake grid (everything below this point)
+              const Text('Ground Intake (see home page for layout)'),
+              const SizedBox(height: 8),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    GroundIntakeButton(
+                        selected: ScoutingAppState.autoGroundIntake1,
+                        onPressed: (newValue) => setState(() =>
+                            ScoutingAppState.autoGroundIntake1 = newValue)),
+                    const SizedBox(width: 8),
+                    GroundIntakeButton(
+                        selected: ScoutingAppState.autoGroundIntake2,
+                        onPressed: (newValue) => setState(() =>
+                            ScoutingAppState.autoGroundIntake2 = newValue)),
+                    const SizedBox(width: 8),
+                    GroundIntakeButton(
+                        selected: ScoutingAppState.autoGroundIntake3,
+                        onPressed: (newValue) => setState(() =>
+                            ScoutingAppState.autoGroundIntake3 = newValue)),
+                  ]),
+              const SizedBox(height: 8),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    GroundIntakeButton(
+                        selected: ScoutingAppState.autoGroundIntake4,
+                        onPressed: (newValue) => setState(() =>
+                            ScoutingAppState.autoGroundIntake4 = newValue)),
+                    const SizedBox(width: 8),
+                    GroundIntakeButton(
+                        selected: ScoutingAppState.autoGroundIntake5,
+                        onPressed: (newValue) => setState(() =>
+                            ScoutingAppState.autoGroundIntake5 = newValue)),
+                    const SizedBox(width: 8),
+                    GroundIntakeButton(
+                        selected: ScoutingAppState.autoGroundIntake6,
+                        onPressed: (newValue) => setState(() =>
+                            ScoutingAppState.autoGroundIntake6 = newValue)),
+                  ]),
+              const SizedBox(height: 8),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    GroundIntakeButton(
+                        selected: ScoutingAppState.autoGroundIntake7,
+                        onPressed: (newValue) => setState(() =>
+                            ScoutingAppState.autoGroundIntake7 = newValue)),
+                    const SizedBox(width: 8),
+                    GroundIntakeButton(
+                        selected: ScoutingAppState.autoGroundIntake8,
+                        onPressed: (newValue) => setState(() =>
+                            ScoutingAppState.autoGroundIntake8 = newValue)),
+                    const SizedBox(width: 8),
+                    GroundIntakeButton(
+                        selected: ScoutingAppState.autoGroundIntake9,
+                        onPressed: (newValue) => setState(() =>
+                            ScoutingAppState.autoGroundIntake9 = newValue)),
+                  ]),
+              const SizedBox(height: 8),
+              GroundIntakeButton(
+                  selected: ScoutingAppState.autoGroundIntake10,
+                  onPressed: (newValue) => setState(
+                      () => ScoutingAppState.autoGroundIntake10 = newValue)),
+              const SizedBox(height: 8),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: GroundIntakeButton(
+                    selected: ScoutingAppState.autoGroundIntake11,
+                    onPressed: (newValue) => setState(
+                        () => ScoutingAppState.autoGroundIntake11 = newValue)),
+              ),
+            ])));
   }
 }

@@ -14,6 +14,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   void updateRobotPosition(newValue) {
+    setState(() {
+      ScoutingAppState.robotPosition = newValue!;
+    });
+  }
+
+  void clear() {
     bool isConfirmed = false;
     showDialog(
         context: context,
@@ -35,10 +41,7 @@ class _HomePageState extends State<HomePage> {
                       });
 
                       if (isConfirmed) {
-                        setState(() {
-                          ScoutingAppState.reset(true);
-                          ScoutingAppState.robotPosition = newValue!;
-                        });
+                        ScoutingAppState.reset(true);
                       }
                     },
                     child: const Text('OK'))
@@ -57,9 +60,10 @@ class _HomePageState extends State<HomePage> {
           centerTitle: true,
           backgroundColor: lightTheme.colorScheme.primary,
         ),
-        body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+        body: SingleChildScrollView(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
               //does not use the custom text field widget because that widget does not work
               const Text('Scouter Name'),
               SizedBox(
@@ -110,10 +114,11 @@ class _HomePageState extends State<HomePage> {
                     buttonValue: ScoutingAppState.robotPosition,
                     changeState: updateRobotPosition),
               ),
+              ElevatedButton(onPressed: clear, child: const Text("Clear data")),
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Image.asset('images/image.png'),
               )
-            ]));
+            ])));
   }
 }
