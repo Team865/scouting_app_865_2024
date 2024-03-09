@@ -93,9 +93,11 @@ class _HomePageState extends State<HomePage> {
                       ]),
                 ],
               ),
-              const SizedBox(height: 8),
-              const Text('Robot Position'),
-              const SizedBox(height: 8),
+
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: const Text('Robot Position'),
+              ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 12),
                 child: RadioButton(
@@ -108,7 +110,10 @@ class _HomePageState extends State<HomePage> {
                     buttonValue: ScoutingAppState.robotPosition,
                     changeState: updateRobotPosition),
               ),
-              Image.asset('images/playing_field.jpg')
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Image.asset('images/image.png'),
+              )
             ]));
   }
 }

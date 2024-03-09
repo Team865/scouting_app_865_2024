@@ -55,7 +55,7 @@ class _AutoPageState extends State<AutoPage> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('Amp:'),
+            const Text('Amp'),
             const SizedBox(height: 8),
             ScoreCounter(
                 scoreCounter: ScoutingAppState.autoAmpScored,
@@ -136,10 +136,13 @@ class _AutoPageState extends State<AutoPage> {
                 onPressed: (newValue) => setState(
                     () => ScoutingAppState.autoGroundIntake10 = newValue)),
             const SizedBox(height: 8),
-            GroundIntakeButton(
-                selected: ScoutingAppState.autoGroundIntake11,
-                onPressed: (newValue) => setState(
-                    () => ScoutingAppState.autoGroundIntake11 = newValue)),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: GroundIntakeButton(
+                  selected: ScoutingAppState.autoGroundIntake11,
+                  onPressed: (newValue) => setState(
+                      () => ScoutingAppState.autoGroundIntake11 = newValue)),
+            ),
           ],
         ));
   }
