@@ -78,7 +78,7 @@ class _AutoPageState extends State<AutoPage> {
               const SizedBox(height: 8)
             ]),
             //ground intake grid (everything below this point)
-            const Text('Ground Intake'),
+            const Text('Ground Intake (see home page for layout)'),
             const SizedBox(height: 8),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
               GroundIntakeButton(
