@@ -23,13 +23,7 @@ class _SubmissionState extends State<SubmissionPage> {
                 content: Text("You're missing something, make sure you filled every field$easterEgg"),
                 actions: <Widget>[
                   TextButton(
-                    onPressed: () => Navigator.pop(context, 'Cancel'),
-                    child: const Text('Cancel'),
-                  ),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pop(context, 'OK');
-                      },
+                      onPressed: () => Navigator.pop(context, 'OK'),
                       child: const Text('OK'))
                 ]);
           } else {
