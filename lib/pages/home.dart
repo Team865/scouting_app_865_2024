@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Home',
             style: TextStyle(color: Colors.white),
           ),
@@ -98,9 +98,9 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
 
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: const Text('Robot Position'),
+              const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text('Robot Position'),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 12),
@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
               ElevatedButton(onPressed: clear, child: const Text("Clear data")),
               Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: Image.asset('images/image.png'),
+                child: Image.asset('images/field.png'),
               )
             ])));
   }

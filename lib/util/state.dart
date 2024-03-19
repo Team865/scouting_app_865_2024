@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:scouting_app_865_2024/main.dart';
+import 'package:scouting_app_865_2024/pages/admin.dart';
 import 'package:scouting_app_865_2024/pages/auto.dart';
 import 'package:scouting_app_865_2024/pages/endgame.dart';
 import 'package:scouting_app_865_2024/pages/home.dart';
@@ -9,6 +10,7 @@ import 'package:scouting_app_865_2024/pages/teleop.dart';
 
 class ScoutingAppState extends State<ScoutingApp> {
   int pageIndex = 0;
+  int adminPressCount = 0;
 
   //text editing controllers
   static var nameController = TextEditingController();
@@ -64,6 +66,15 @@ class ScoutingAppState extends State<ScoutingApp> {
             selectedIndex: pageIndex,
             onDestinationSelected: (int index) {
               setState(() {
+                if (index == 5) { // this really shouldn't be hardcoded, change it if more pages are added (admin should be on far right no matter what)
+                  adminPressCount++;
+                  if (adminPressCount >= 15) { // nobody gonna press this 15 times by accident
+                    adminPressCount = 0;
+                  } else {
+                    return;
+                  }
+                }
+
                 pageIndex = index;
               });
             },
@@ -76,14 +87,17 @@ class ScoutingAppState extends State<ScoutingApp> {
               NavigationDestination(
                   icon: Icon(Icons.access_time), label: 'Endgame'),
               NavigationDestination(
-                  icon: Icon(Icons.qr_code), label: 'Submission')
+                  icon: Icon(Icons.qr_code), label: 'Submission'),
+              NavigationDestination(
+                  icon: Icon(Icons.remove_moderator_rounded), label: 'Admin')
             ]),
         body: <Widget>[
           const HomePage(),
           const AutoPage(),
           const TeleopPage(),
           const EndgamePage(),
-          const SubmissionPage()
+          const SubmissionPage(),
+          const AdminPage()
         ][pageIndex]);
   }
 
@@ -93,13 +107,15 @@ class ScoutingAppState extends State<ScoutingApp> {
 
   static int boolsToInt(List<bool> values) {
     int intValue = 0;
-    values.forEach((value) => intValue += boolToInt(value));
+    for (bool value in values) {
+      intValue += boolToInt(value);
+    }
     return intValue;
   }
 
   static String sterilize(String value) {
-    return value.replaceAll(RegExp(r"[=\(\)\\;\{\}]"),
-        "_"); // no valid string a person would enter should need these
+    // no valid string a person would enter should need these
+    return value.replaceAll(RegExp(r"[=\(\)\\;\{\}]"), "_");
   }
 
   static void reset(bool keepName) {
@@ -230,91 +246,13 @@ class ScoutingAppState extends State<ScoutingApp> {
       }
     }
 
-    print("Sending data ${data}");
+    // ignore: avoid_print
+    print("Sending data $data");
 
     return data;
   }
+
+  static bool dataInvalid() {
+    return nameController.text.isEmpty || matchController.text.isEmpty || teamController.text.isEmpty || commentsController.text.isEmpty || robotPosition.isEmpty;
+  }
 }
-
-/*
-class MyAppState extends ChangeNotifier {
-  /*
-  FOR TESTING ONLY
-  note: in this code, typing in the text field does not change the score counter value, only the text value
-
-  int scoreCounter1 = 0;
-  final scoreCounterController1 = TextEditingController();
-  changeValue1(int increment) {
-    scoreCounter1 += increment;
-    scoreCounterController1.text = '$scoreCounter1';
-    notifyListeners();
-  //variables
-
-  //auto
-  static int autoAmpScored = 0;
-  static int autoSpeakerScored = 0;
-  static bool? autoMobility = false;
-  static bool autoGroundIntake1 = false;
-  static bool autoGroundIntake2 = false;
-  static bool autoGroundIntake3 = false;
-  static bool autoGroundIntake4 = false;
-  static bool autoGroundIntake5 = false;
-  static bool autoGroundIntake6 = false;
-  static bool autoGroundIntake7 = false;
-  static bool autoGroundIntake8 = false;
-  static bool autoGroundIntake9 = false;
-  static bool autoGroundIntake10 = false;
-  static bool autoGroundIntake11 = false;
-
-  //endgame
-  static bool climb = false;
-  static bool park = false;
-  static bool trap = false;
-
-  //text editing controllers
-  static var autoAmpController = TextEditingController();
-  static var autoSpeakerController = TextEditingController();
-
-  //functions
-  static incrementAutoAmp(int incValue) {
-    autoAmpScored += incValue;
-    autoAmpController.text = '$autoAmpScored';
-    UpdateShouldNotify;
-  }
-
-  static incrementAutoSpeaker(int incValue) {
-    autoSpeakerScored += incValue;
-    autoSpeakerController.text = '$autoSpeakerScored';
-    UpdateShouldNotify;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        bottomNavigationBar: NavigationBar(
-            selectedIndex: pageIndex,
-            onDestinationSelected: (int index) {
-              setState(() {
-                pageIndex = index;
-              });
-            },
-            destinations: const [
-              NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-              NavigationDestination(
-                  icon: Icon(Icons.videogame_asset_off), label: 'Auto'),
-              NavigationDestination(
-                  icon: Icon(Icons.videogame_asset), label: 'Teleop'),
-              NavigationDestination(
-                  icon: Icon(Icons.access_time), label: 'Endgame'),
-              NavigationDestination(
-                  icon: Icon(Icons.qr_code), label: 'Submission')
-            ]),
-        body: <Widget>[
-          const HomePage(),
-          const AutoPage(),
-          const TeleopPage(),
-          EndgamePage(),
-          const SubmissionPage()
-        ][pageIndex]);
-  }
-}*/*/

@@ -16,28 +16,44 @@ class _SubmissionState extends State<SubmissionPage> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
-              title: const Text('Confirm'),
-              content: const Text(
-                  'Are you sure you want to send the data?'),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () => Navigator.pop(context, 'Cancel'),
-                  child: const Text('Cancel'),
-                ),
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context, 'OK');
-                      setState(() {
-                        isConfirmed = true;
-                      });
+          if (ScoutingAppState.dataInvalid()) {
+            return AlertDialog(
+                title: const Text('Error'),
+                content: const Text("You're missing something, make sure you filled every field"),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                    child: const Text('Cancel'),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context, 'OK');
+                      },
+                      child: const Text('OK'))
+                ]);
+          } else {
+            return AlertDialog(
+                title: const Text('Confirm'),
+                content: const Text('Are you sure you want to send the data?'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                    child: const Text('Cancel'),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context, 'OK');
+                        setState(() {
+                          isConfirmed = true;
+                        });
 
-                      if (isConfirmed) {
-                        GSheetsUtil.addRow(ScoutingAppState.getData());
-                      }
-                    },
-                    child: const Text('OK'))
-              ]);
+                        if (isConfirmed) {
+                          GSheetsUtil.addRow(ScoutingAppState.getData());
+                        }
+                      },
+                      child: const Text('OK'))
+                ]);
+          }
         });
   }
 
@@ -46,7 +62,7 @@ class _SubmissionState extends State<SubmissionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Submission',
           style: TextStyle(color: Colors.white),
         ),
