@@ -17,7 +17,7 @@ class _EasterEggState extends State<EasterEggPage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text(
-            "EasterEgg (only for leadership, don't mess with this page)",
+            "Easter Egg",
             style: TextStyle(color: Colors.white),
           ),
           centerTitle: true,
