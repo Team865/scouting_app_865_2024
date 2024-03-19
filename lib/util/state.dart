@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:scouting_app_865_2024/main.dart';
-import 'package:scouting_app_865_2024/pages/admin.dart';
+import 'package:scouting_app_865_2024/pages/easter_egg.dart';
 import 'package:scouting_app_865_2024/pages/auto.dart';
 import 'package:scouting_app_865_2024/pages/endgame.dart';
 import 'package:scouting_app_865_2024/pages/home.dart';
@@ -10,7 +10,8 @@ import 'package:scouting_app_865_2024/pages/teleop.dart';
 
 class ScoutingAppState extends State<ScoutingApp> {
   int pageIndex = 0;
-  int adminPressCount = 0;
+  int navIndex = 0;
+  int easterEggCount = 0;
 
   //text editing controllers
   static var nameController = TextEditingController();
@@ -61,24 +62,40 @@ class ScoutingAppState extends State<ScoutingApp> {
 
   static bool foundEasterEgg = false;
 
+  static const List<Widget> PAGES = [
+    const HomePage(),
+    const AutoPage(),
+    const TeleopPage(),
+    const EndgamePage(),
+    const SubmissionPage(),
+    const EasterEggPage()
+  ];
+
+  // number of page switches to trigger easter egg
+  static const int EASTER_EGG_TRIGGER_COUNT = 20;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: NavigationBar(
-            selectedIndex: pageIndex,
+            selectedIndex: navIndex,
             onDestinationSelected: (int index) {
               setState(() {
-                if (index == 5) { // this really shouldn't be hardcoded, change it if more pages are added (admin should be on far right no matter what)
-                  adminPressCount++;
-                  if (adminPressCount >= 15) { // nobody gonna press this 15 times by accident
-                    adminPressCount = 0;
-                    foundEasterEgg = true;
+                // trigger by switching pages 20 times, anyone who doesn't reload much will probably get by end of comp
+                // get out by going to page other than home, visually indicated by setting navIndex to home
+                easterEggCount++;
+                if (easterEggCount >= EASTER_EGG_TRIGGER_COUNT) {
+                  foundEasterEgg = true;
+                  pageIndex = PAGES.length - 1;
+                  navIndex = 0;
+                  if (easterEggCount > EASTER_EGG_TRIGGER_COUNT && index != 0) {
+                    easterEggCount = 0;
                   } else {
                     return;
                   }
                 }
 
-                pageIndex = index;
+                navIndex = pageIndex = index;
               });
             },
             destinations: const [
@@ -91,17 +108,8 @@ class ScoutingAppState extends State<ScoutingApp> {
                   icon: Icon(Icons.access_time), label: 'Endgame'),
               NavigationDestination(
                   icon: Icon(Icons.qr_code), label: 'Submission'),
-              NavigationDestination(
-                  icon: Icon(Icons.remove_moderator_rounded), label: 'Admin')
             ]),
-        body: <Widget>[
-          const HomePage(),
-          const AutoPage(),
-          const TeleopPage(),
-          const EndgamePage(),
-          const SubmissionPage(),
-          const AdminPage()
-        ][pageIndex]);
+        body: PAGES[pageIndex]);
   }
 
   static int boolToInt(bool value) {
@@ -259,6 +267,10 @@ class ScoutingAppState extends State<ScoutingApp> {
   }
 
   static bool dataInvalid() {
-    return nameController.text.isEmpty || matchController.text.isEmpty || teamController.text.isEmpty || commentsController.text.isEmpty || robotPosition.isEmpty;
+    return nameController.text.isEmpty ||
+        matchController.text.isEmpty ||
+        teamController.text.isEmpty ||
+        commentsController.text.isEmpty ||
+        robotPosition.isEmpty;
   }
 }

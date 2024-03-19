@@ -3,27 +3,29 @@ import 'package:scouting_app_865_2024/util/gsheets.dart';
 import 'package:scouting_app_865_2024/util/state.dart';
 import 'package:scouting_app_865_2024/util/themes.dart';
 
-class AdminPage extends StatefulWidget {
-  const AdminPage({super.key});
+class EasterEggPage extends StatefulWidget {
+  const EasterEggPage({super.key});
 
   @override
-  State<AdminPage> createState() => _AdminState();
+  State<EasterEggPage> createState() => _EasterEggState();
 }
 
-class _AdminState extends State<AdminPage> {
+class _EasterEggState extends State<EasterEggPage> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text(
-            "Admin (only for leadership, don't mess with this page)",
+            "EasterEgg (only for leadership, don't mess with this page)",
             style: TextStyle(color: Colors.white),
           ),
           centerTitle: true,
           backgroundColor: lightTheme.colorScheme.primary,
         ),
         body: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+            child: SingleChildScrollView(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -79,6 +81,6 @@ class _AdminState extends State<AdminPage> {
                   ],
                 )),
               ]),
-        ));
+        )));
   }
 }
