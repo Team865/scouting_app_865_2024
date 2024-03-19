@@ -15,30 +15,70 @@ class _AdminState extends State<AdminPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Admin (only for leadership, don't mess with this page)",
-          style: TextStyle(color: Colors.white),
+        appBar: AppBar(
+          title: const Text(
+            "Admin (only for leadership, don't mess with this page)",
+            style: TextStyle(color: Colors.white),
+          ),
+          centerTitle: true,
+          backgroundColor: lightTheme.colorScheme.primary,
         ),
-        centerTitle: true,
-        backgroundColor: lightTheme.colorScheme.primary,
-      ),
-      body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Center(
-              child: Padding(
-                padding: EdgeInsets.only(top: 30.0),
-                child: Text("Nothing needed here yet, but this page exists as an easter egg I guess"),
-              ),
-            ),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 30.0),
-                child: Image.asset("images/rick.jpg"),
-              ),
-            ),
-          ]),
-    );
+        body: SingleChildScrollView(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 30.0),
+                    child: Text(
+                        "Nothing needed here yet, but this page exists as an easter egg I guess"),
+                  ),
+                ),
+                Center(
+                    child: Column(
+                  children: <Widget>[
+                    Row(children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30.0),
+                        child: Image.asset(
+                            "images/tej2o1-01_d-joe_franzen-easter-egg-1.webp",
+                            width: 400,
+                            height: 400),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30.0),
+                        child: Image.asset(
+                            "images/tej2o1-01_d-joe_franzen-easter-egg-2.webp",
+                            width: 400,
+                            height: 400),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30.0),
+                        child: Image.asset(
+                            "images/tej2o1-01_d-joe_franzen-easter-egg-3.webp",
+                            width: 400,
+                            height: 400),
+                      ),
+                    ]),
+                    Row(children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30.0),
+                        child: Image.asset(
+                            "images/tej2o1-01_d-joe_franzen-easter-egg-4.webp",
+                            width: 400,
+                            height: 400),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30.0),
+                        child: Image.asset(
+                            "images/tej2o1-01_d-joe_franzen-easter-egg-5.jpg",
+                            width: 400,
+                            height: 400),
+                      ),
+                    ])
+                  ],
+                )),
+              ]),
+        ));
   }
 }

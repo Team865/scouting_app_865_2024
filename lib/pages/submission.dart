@@ -13,13 +13,14 @@ class SubmissionPage extends StatefulWidget {
 class _SubmissionState extends State<SubmissionPage> {
   void sendData() {
     bool isConfirmed = false;
+    String easterEgg = ScoutingAppState.foundEasterEgg ? " (you found the easter egg!)" : "";
     showDialog(
         context: context,
         builder: (BuildContext context) {
           if (ScoutingAppState.dataInvalid()) {
             return AlertDialog(
-                title: const Text('Error'),
-                content: const Text("You're missing something, make sure you filled every field"),
+                title: const Text('Missing fields'),
+                content: Text("You're missing something, make sure you filled every field$easterEgg"),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -34,7 +35,7 @@ class _SubmissionState extends State<SubmissionPage> {
           } else {
             return AlertDialog(
                 title: const Text('Confirm'),
-                content: const Text('Are you sure you want to send the data?'),
+                content: Text('Are you sure you want to send the data$easterEgg?'),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () => Navigator.pop(context, 'Cancel'),

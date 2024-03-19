@@ -59,6 +59,8 @@ class ScoutingAppState extends State<ScoutingApp> {
   static bool park = false;
   static bool trap = false;
 
+  static bool foundEasterEgg = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +72,7 @@ class ScoutingAppState extends State<ScoutingApp> {
                   adminPressCount++;
                   if (adminPressCount >= 15) { // nobody gonna press this 15 times by accident
                     adminPressCount = 0;
+                    foundEasterEgg = true;
                   } else {
                     return;
                   }
@@ -164,6 +167,8 @@ class ScoutingAppState extends State<ScoutingApp> {
     climb = false;
     park = false;
     trap = false;
+
+    foundEasterEgg = false;
   }
 
   static List<dynamic> getData() {
@@ -232,6 +237,7 @@ class ScoutingAppState extends State<ScoutingApp> {
       climb,
       park,
       trap,
+      foundEasterEgg
     ];
 
     // make all text fields strings and sterilize them
