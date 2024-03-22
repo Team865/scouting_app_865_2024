@@ -72,7 +72,7 @@ class ScoutingAppState extends State<ScoutingApp> {
   ];
 
   // number of page switches to trigger easter egg
-  static const int EASTER_EGG_TRIGGER_COUNT = 20;
+  static const int EASTER_EGG_TRIGGER_COUNT = 60;
 
   @override
   Widget build(BuildContext context) {
