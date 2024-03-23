@@ -42,17 +42,6 @@ class ScoutingAppState extends State<ScoutingApp> {
   static int teleopAmpScored = 0;
   static int teleopSpeakerScored = 0;
   static bool teleopDefense = false;
-  static bool teleopGroundIntake1 = false;
-  static bool teleopGroundIntake2 = false;
-  static bool teleopGroundIntake3 = false;
-  static bool teleopGroundIntake4 = false;
-  static bool teleopGroundIntake5 = false;
-  static bool teleopGroundIntake6 = false;
-  static bool teleopGroundIntake7 = false;
-  static bool teleopGroundIntake8 = false;
-  static bool teleopGroundIntake9 = false;
-  static bool teleopGroundIntake10 = false;
-  static bool teleopGroundIntake11 = false;
   static bool techFoul = false;
   static bool foul = false;
   //endgame
@@ -158,17 +147,6 @@ class ScoutingAppState extends State<ScoutingApp> {
     teleopAmpScored = 0;
     teleopSpeakerScored = 0;
     teleopDefense = false;
-    teleopGroundIntake1 = false;
-    teleopGroundIntake2 = false;
-    teleopGroundIntake3 = false;
-    teleopGroundIntake4 = false;
-    teleopGroundIntake5 = false;
-    teleopGroundIntake6 = false;
-    teleopGroundIntake7 = false;
-    teleopGroundIntake8 = false;
-    teleopGroundIntake9 = false;
-    teleopGroundIntake10 = false;
-    teleopGroundIntake11 = false;
     techFoul = false;
     foul = false;
 
@@ -216,30 +194,6 @@ class ScoutingAppState extends State<ScoutingApp> {
       teleopAmpScored,
       teleopSpeakerScored,
       teleopDefense,
-      boolsToInt([
-        teleopGroundIntake1,
-        teleopGroundIntake2,
-        teleopGroundIntake3,
-        teleopGroundIntake4,
-        teleopGroundIntake5,
-        teleopGroundIntake6,
-        teleopGroundIntake7,
-        teleopGroundIntake8,
-        teleopGroundIntake9,
-        teleopGroundIntake10,
-        teleopGroundIntake11
-      ]),
-      teleopGroundIntake1,
-      teleopGroundIntake2,
-      teleopGroundIntake3,
-      teleopGroundIntake4,
-      teleopGroundIntake5,
-      teleopGroundIntake6,
-      teleopGroundIntake7,
-      teleopGroundIntake8,
-      teleopGroundIntake9,
-      teleopGroundIntake10,
-      teleopGroundIntake11,
       techFoul,
       foul,
       climb,

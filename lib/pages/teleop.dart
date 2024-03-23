@@ -63,9 +63,10 @@ class _TeleopPageState extends State<TeleopPage> {
             ),
             centerTitle: true,
             backgroundColor: lightTheme.colorScheme.primary),
-        body: SingleChildScrollView(child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+        body: SingleChildScrollView(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
               const Text('Amp'),
               const SizedBox(height: 8),
               ScoreCounter(
@@ -113,78 +114,6 @@ class _TeleopPageState extends State<TeleopPage> {
                             checkboxTitle: 'Foul',
                             checkboxSubtitle: '')),
                   ]),
-              //ground intake grid (everything below this point)
-              const Text('Ground Intake (see home page for layout)'),
-              const SizedBox(height: 8),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    GroundIntakeButton(
-                        selected: ScoutingAppState.teleopGroundIntake1,
-                        onPressed: (newValue) => setState(() =>
-                            ScoutingAppState.teleopGroundIntake1 = newValue)),
-                    const SizedBox(width: 8),
-                    GroundIntakeButton(
-                        selected: ScoutingAppState.teleopGroundIntake2,
-                        onPressed: (newValue) => setState(() =>
-                            ScoutingAppState.teleopGroundIntake2 = newValue)),
-                    const SizedBox(width: 8),
-                    GroundIntakeButton(
-                        selected: ScoutingAppState.teleopGroundIntake3,
-                        onPressed: (newValue) => setState(() =>
-                            ScoutingAppState.teleopGroundIntake3 = newValue)),
-                  ]),
-              const SizedBox(height: 8),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    GroundIntakeButton(
-                        selected: ScoutingAppState.teleopGroundIntake4,
-                        onPressed: (newValue) => setState(() =>
-                            ScoutingAppState.teleopGroundIntake4 = newValue)),
-                    const SizedBox(width: 8),
-                    GroundIntakeButton(
-                        selected: ScoutingAppState.teleopGroundIntake5,
-                        onPressed: (newValue) => setState(() =>
-                            ScoutingAppState.teleopGroundIntake5 = newValue)),
-                    const SizedBox(width: 8),
-                    GroundIntakeButton(
-                        selected: ScoutingAppState.teleopGroundIntake6,
-                        onPressed: (newValue) => setState(() =>
-                            ScoutingAppState.teleopGroundIntake6 = newValue)),
-                  ]),
-              const SizedBox(height: 8),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    GroundIntakeButton(
-                        selected: ScoutingAppState.teleopGroundIntake7,
-                        onPressed: (newValue) => setState(() =>
-                            ScoutingAppState.teleopGroundIntake7 = newValue)),
-                    const SizedBox(width: 8),
-                    GroundIntakeButton(
-                        selected: ScoutingAppState.teleopGroundIntake8,
-                        onPressed: (newValue) => setState(() =>
-                            ScoutingAppState.teleopGroundIntake8 = newValue)),
-                    const SizedBox(width: 8),
-                    GroundIntakeButton(
-                        selected: ScoutingAppState.teleopGroundIntake9,
-                        onPressed: (newValue) => setState(() =>
-                            ScoutingAppState.teleopGroundIntake9 = newValue)),
-                  ]),
-              const SizedBox(height: 8),
-              GroundIntakeButton(
-                  selected: ScoutingAppState.teleopGroundIntake10,
-                  onPressed: (newValue) => setState(
-                      () => ScoutingAppState.teleopGroundIntake10 = newValue)),
-              const SizedBox(height: 8),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: GroundIntakeButton(
-                    selected: ScoutingAppState.teleopGroundIntake11,
-                    onPressed: (newValue) => setState(
-                        () => ScoutingAppState.teleopGroundIntake11 = newValue)),
-              ),
             ])));
   }
 }
