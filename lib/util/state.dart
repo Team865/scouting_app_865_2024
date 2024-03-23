@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:scouting_app_865_2024/main.dart';
 import 'package:scouting_app_865_2024/pages/easter_egg.dart';
+import 'package:scouting_app_865_2024/pages/easter_egg_2.dart';
 import 'package:scouting_app_865_2024/pages/auto.dart';
 import 'package:scouting_app_865_2024/pages/endgame.dart';
 import 'package:scouting_app_865_2024/pages/home.dart';
@@ -9,9 +10,11 @@ import 'package:scouting_app_865_2024/pages/submission.dart';
 import 'package:scouting_app_865_2024/pages/teleop.dart';
 
 class ScoutingAppState extends State<ScoutingApp> {
-  int pageIndex = 0;
-  int navIndex = 0;
-  int easterEggCount = 0;
+  static int pageIndex = 0;
+  static int navIndex = 0;
+
+  static int easterEggCount = 0;
+  static int easterEgg2Count = 0;
 
   //text editing controllers
   static var nameController = TextEditingController();
@@ -49,7 +52,7 @@ class ScoutingAppState extends State<ScoutingApp> {
   static bool park = false;
   static bool trap = false;
 
-  static bool foundEasterEgg = false;
+  static int foundEasterEggs = 0;
 
   static const List<Widget> PAGES = [
     const HomePage(),
@@ -57,11 +60,12 @@ class ScoutingAppState extends State<ScoutingApp> {
     const TeleopPage(),
     const EndgamePage(),
     const SubmissionPage(),
-    const EasterEggPage()
+    const EasterEgg2Page(),
+    const EasterEggPage(),
   ];
 
   // number of page switches to trigger easter egg
-  static const int EASTER_EGG_TRIGGER_COUNT = 60;
+  static const int EASTER_EGG_TRIGGER_COUNT = 86; // rounded from 86.5 because 865 is too many
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +74,11 @@ class ScoutingAppState extends State<ScoutingApp> {
             selectedIndex: navIndex,
             onDestinationSelected: (int index) {
               setState(() {
-                // trigger by switching pages 20 times, anyone who doesn't reload much will probably get by end of comp
+                // trigger by switching pages 60 times, anyone who doesn't reload much will probably get by end of comp
                 // get out by going to page other than home, visually indicated by setting navIndex to home
                 easterEggCount++;
                 if (easterEggCount >= EASTER_EGG_TRIGGER_COUNT) {
-                  foundEasterEgg = true;
+                  foundEasterEggs++;
                   pageIndex = PAGES.length - 1;
                   navIndex = 0;
                   if (easterEggCount > EASTER_EGG_TRIGGER_COUNT && index != 0) {
@@ -153,8 +157,6 @@ class ScoutingAppState extends State<ScoutingApp> {
     climb = false;
     park = false;
     trap = false;
-
-    foundEasterEgg = false;
   }
 
   static List<dynamic> getData() {
@@ -199,7 +201,7 @@ class ScoutingAppState extends State<ScoutingApp> {
       climb,
       park,
       trap,
-      foundEasterEgg
+      foundEasterEggs
     ];
 
     // make all text fields strings and sterilize them

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:scouting_app_865_2024/util/state.dart';
+import 'package:scouting_app_865_2024/components/checkmark_button.dart';
 import 'package:scouting_app_865_2024/components/radio_buttons.dart';
 import 'package:scouting_app_865_2024/util/themes.dart';
 
@@ -13,6 +14,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var fieldImage = Image.asset('images/field.png');
+  bool flipped = false;
+
   void updateRobotPosition(newValue) {
     setState(() {
       ScoutingAppState.robotPosition = newValue!;
@@ -115,9 +119,51 @@ class _HomePageState extends State<HomePage> {
                     changeState: updateRobotPosition),
               ),
               ElevatedButton(onPressed: clear, child: const Text("Clear data")),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                        width: 200,
+                        child: CheckmarkButton(
+                            isChecked: flipped,
+                            changeState: (value) => {
+                                  setState(() {
+                                    ScoutingAppState.easterEgg2Count++;
+                                    print(ScoutingAppState.easterEgg2Count);
+                                    if (ScoutingAppState.easterEgg2Count >=
+                                        ScoutingAppState
+                                            .EASTER_EGG_TRIGGER_COUNT) {
+                                      ScoutingAppState.foundEasterEggs++;
+                                      ScoutingAppState.pageIndex =
+                                          ScoutingAppState.PAGES.length - 2;
+                                      ScoutingAppState.navIndex = 0;
+                                      if (ScoutingAppState.easterEgg2Count >
+                                          ScoutingAppState
+                                              .EASTER_EGG_TRIGGER_COUNT) {
+                                        ScoutingAppState.easterEgg2Count = 0;
+                                      } else {
+                                        return;
+                                      }
+                                    }
+
+                                    if (value != null) {
+                                      flipped = value;
+                                    }
+                                    if (flipped) {
+                                      fieldImage = Image.asset(
+                                          "images/field_flipped.png");
+                                    } else {
+                                      fieldImage =
+                                          Image.asset("images/field.png");
+                                    }
+                                  })
+                                },
+                            checkboxTitle: 'Flip field',
+                            checkboxSubtitle: ''))
+                  ]),
               Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: Image.asset('images/field.png'),
+                child: fieldImage,
               )
             ])));
   }
