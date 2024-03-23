@@ -128,24 +128,7 @@ class _HomePageState extends State<HomePage> {
                             isChecked: flipped,
                             changeState: (value) => {
                                   setState(() {
-                                    ScoutingAppState.easterEgg2Count++;
-                                    print(ScoutingAppState.easterEgg2Count);
-                                    if (ScoutingAppState.easterEgg2Count >=
-                                        ScoutingAppState
-                                            .EASTER_EGG_TRIGGER_COUNT) {
-                                      ScoutingAppState.foundEasterEggs++;
-                                      ScoutingAppState.pageIndex =
-                                          ScoutingAppState.PAGES.length - 2;
-                                      ScoutingAppState.navIndex = 0;
-                                      if (ScoutingAppState.easterEgg2Count >
-                                          ScoutingAppState
-                                              .EASTER_EGG_TRIGGER_COUNT) {
-                                        ScoutingAppState.easterEgg2Count = 0;
-                                      } else {
-                                        return;
-                                      }
-                                    }
-
+                                    ScoutingAppState.processEasterEgg2();
                                     if (value != null) {
                                       flipped = value;
                                     }

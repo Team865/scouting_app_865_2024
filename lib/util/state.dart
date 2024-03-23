@@ -11,7 +11,7 @@ import 'package:scouting_app_865_2024/pages/teleop.dart';
 
 class ScoutingAppState extends State<ScoutingApp> {
   static int pageIndex = 0;
-  static int navIndex = 0;
+  static final navIndex = ValueNotifier(0);
 
   static int easterEggCount = 0;
   static int easterEgg2Count = 0;
@@ -54,55 +54,73 @@ class ScoutingAppState extends State<ScoutingApp> {
 
   static int foundEasterEggs = 0;
 
-  static const List<Widget> PAGES = [
-    const HomePage(),
-    const AutoPage(),
-    const TeleopPage(),
-    const EndgamePage(),
-    const SubmissionPage(),
-    const EasterEgg2Page(),
-    const EasterEggPage(),
+  static const pages = [
+    HomePage(),
+    AutoPage(),
+    TeleopPage(),
+    EndgamePage(),
+    SubmissionPage(),
+    EasterEgg2Page(),
+    EasterEggPage(),
   ];
 
   // number of page switches to trigger easter egg
-  static const int EASTER_EGG_TRIGGER_COUNT = 86; // rounded from 86.5 because 865 is too many
+  static const easterEggTriggerCount =
+      86; // rounded from 86.5 because 865 is too many
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        bottomNavigationBar: NavigationBar(
-            selectedIndex: navIndex,
-            onDestinationSelected: (int index) {
-              setState(() {
-                // trigger by switching pages 60 times, anyone who doesn't reload much will probably get by end of comp
-                // get out by going to page other than home, visually indicated by setting navIndex to home
-                easterEggCount++;
-                if (easterEggCount >= EASTER_EGG_TRIGGER_COUNT) {
-                  foundEasterEggs++;
-                  pageIndex = PAGES.length - 1;
-                  navIndex = 0;
-                  if (easterEggCount > EASTER_EGG_TRIGGER_COUNT && index != 0) {
-                    easterEggCount = 0;
-                  } else {
-                    return;
-                  }
-                }
+    return ValueListenableBuilder(
+        valueListenable: navIndex,
+        builder: (context, value, child) {
+          print("build");
+          return Scaffold(
+              bottomNavigationBar: NavigationBar(
+                  selectedIndex: navIndex.value,
+                  onDestinationSelected: (int index) {
+                    setState(() {
+                      // trigger by switching pages 86 times, anyone who doesn't reload much will probably get by end of comp
+                      // get out by going to page other than home, visually indicated by setting navIndex to home
+                      easterEggCount++;
+                      if (easterEggCount >= easterEggTriggerCount) {
+                        foundEasterEggs++;
+                        pageIndex = pages.length - 1;
+                        navIndex.value = 0;
+                        if (easterEggCount > easterEggTriggerCount &&
+                            index != 0) {
+                          easterEggCount = 0;
+                        } else {
+                          return;
+                        }
+                      }
 
-                navIndex = pageIndex = index;
-              });
-            },
-            destinations: const [
-              NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-              NavigationDestination(
-                  icon: Icon(Icons.videogame_asset_off), label: 'Auto'),
-              NavigationDestination(
-                  icon: Icon(Icons.videogame_asset), label: 'Teleop'),
-              NavigationDestination(
-                  icon: Icon(Icons.access_time), label: 'Endgame'),
-              NavigationDestination(
-                  icon: Icon(Icons.qr_code), label: 'Submission'),
-            ]),
-        body: PAGES[pageIndex]);
+                      navIndex.value = pageIndex = index;
+                    });
+                  },
+                  destinations: const [
+                    NavigationDestination(
+                        icon: Icon(Icons.home), label: 'Home'),
+                    NavigationDestination(
+                        icon: Icon(Icons.videogame_asset_off), label: 'Auto'),
+                    NavigationDestination(
+                        icon: Icon(Icons.videogame_asset), label: 'Teleop'),
+                    NavigationDestination(
+                        icon: Icon(Icons.access_time), label: 'Endgame'),
+                    NavigationDestination(
+                        icon: Icon(Icons.qr_code), label: 'Submission'),
+                  ]),
+              body: pages[pageIndex]);
+        });
+  }
+
+  static void processEasterEgg2() {
+    easterEgg2Count++;
+    if (easterEgg2Count >= easterEggTriggerCount) {
+      foundEasterEggs++;
+      pageIndex = pages.length - 2;
+      navIndex.value = 1;
+      easterEgg2Count = 0;
+    }
   }
 
   static int boolToInt(bool value) {
