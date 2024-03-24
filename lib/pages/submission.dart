@@ -13,7 +13,8 @@ class SubmissionPage extends StatefulWidget {
 class _SubmissionState extends State<SubmissionPage> {
   void sendData() {
     bool isConfirmed = false;
-    String easterEgg = ScoutingAppState.foundEasterEggs > 0 ? " (you triggered easter eggs ${ScoutingAppState.foundEasterEggs} time(s)!)" : "";
+    int easterEggs = ScoutingAppState.boolsToInt([ScoutingAppState.foundEasterEgg, ScoutingAppState.foundEasterEgg2]);
+    String easterEgg = easterEggs > 0 ? " (you found $easterEggs easter egg(s)!)" : "";
     showDialog(
         context: context,
         builder: (BuildContext context) {

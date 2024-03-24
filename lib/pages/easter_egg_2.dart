@@ -47,6 +47,13 @@ class _EasterEgg2State extends State<EasterEgg2Page> {
                             width: 400,
                             height: 400),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30.0),
+                        child: Image.asset(
+                            "images/simon.jpg",
+                            width: 400,
+                            height: 400),
+                      ),
                     ])
                   ],
                 )),

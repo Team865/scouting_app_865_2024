@@ -52,7 +52,8 @@ class ScoutingAppState extends State<ScoutingApp> {
   static bool park = false;
   static bool trap = false;
 
-  static int foundEasterEggs = 0;
+  static bool foundEasterEgg = false;
+  static bool foundEasterEgg2 = false;
 
   static const pages = [
     HomePage(),
@@ -83,7 +84,7 @@ class ScoutingAppState extends State<ScoutingApp> {
                       // get out by going to page other than home, visually indicated by setting navIndex to home
                       easterEggCount++;
                       if (easterEggCount >= easterEggTriggerCount) {
-                        foundEasterEggs++;
+                        foundEasterEgg = true;
                         pageIndex = pages.length - 1;
                         navIndex.value = 0;
                         if (easterEggCount > easterEggTriggerCount &&
@@ -116,7 +117,7 @@ class ScoutingAppState extends State<ScoutingApp> {
   static void processEasterEgg2() {
     easterEgg2Count++;
     if (easterEgg2Count >= easterEggTriggerCount) {
-      foundEasterEggs++;
+      foundEasterEgg2 = true;
       pageIndex = pages.length - 2;
       navIndex.value = 1;
       easterEgg2Count = 0;
@@ -219,7 +220,9 @@ class ScoutingAppState extends State<ScoutingApp> {
       climb,
       park,
       trap,
-      foundEasterEggs
+      boolsToInt([foundEasterEgg, foundEasterEgg2]),
+      foundEasterEgg,
+      foundEasterEgg2
     ];
 
     // make all text fields strings and sterilize them
