@@ -13,8 +13,10 @@ class ScoutingAppState extends State<ScoutingApp> {
   static int pageIndex = 0;
   static final navIndex = ValueNotifier(0);
 
-  static int easterEggCount = 0;
-  static int easterEgg2Count = 0;
+  // TODO: de-scuff
+  static const numberOfEasterEggs = 2;
+  static List<int> easterEggCounts = [0, 0];
+  static List<bool> foundEasterEggs = [false, false];
 
   //text editing controllers
   static var nameController = TextEditingController();
@@ -52,9 +54,6 @@ class ScoutingAppState extends State<ScoutingApp> {
   static bool park = false;
   static bool trap = false;
 
-  static bool foundEasterEgg = false;
-  static bool foundEasterEgg2 = false;
-
   static const pages = [
     HomePage(),
     AutoPage(),
@@ -82,14 +81,14 @@ class ScoutingAppState extends State<ScoutingApp> {
                     setState(() {
                       // trigger by switching pages 86 times, anyone who doesn't reload much will probably get by end of comp
                       // get out by going to page other than home, visually indicated by setting navIndex to home
-                      easterEggCount++;
-                      if (easterEggCount >= easterEggTriggerCount) {
-                        foundEasterEgg = true;
+                      easterEggCounts[0]++;
+                      if (easterEggCounts[0] >= easterEggTriggerCount) {
+                        foundEasterEggs[0] = true;
                         pageIndex = pages.length - 1;
                         navIndex.value = 0;
-                        if (easterEggCount > easterEggTriggerCount &&
+                        if (easterEggCounts[0] > easterEggTriggerCount &&
                             index != 0) {
-                          easterEggCount = 0;
+                          easterEggCounts[0] = 0;
                         } else {
                           return;
                         }
@@ -115,12 +114,12 @@ class ScoutingAppState extends State<ScoutingApp> {
   }
 
   static void processEasterEgg2() {
-    easterEgg2Count++;
-    if (easterEgg2Count >= easterEggTriggerCount) {
-      foundEasterEgg2 = true;
+    easterEggCounts[1]++;
+    if (easterEggCounts[1] >= easterEggTriggerCount) {
+      foundEasterEggs[1] = true;
       pageIndex = pages.length - 2;
       navIndex.value = 1;
-      easterEgg2Count = 0;
+      easterEggCounts[1] = 0;
     }
   }
 
@@ -183,8 +182,8 @@ class ScoutingAppState extends State<ScoutingApp> {
       nameController,
       matchController,
       teamController,
-      commentsController,
       robotPosition,
+      commentsController,
       autoAmpScored,
       autoSpeakerScored,
       autoMobility,
@@ -220,10 +219,12 @@ class ScoutingAppState extends State<ScoutingApp> {
       climb,
       park,
       trap,
-      boolsToInt([foundEasterEgg, foundEasterEgg2]),
-      foundEasterEgg,
-      foundEasterEgg2
+      boolsToInt(foundEasterEggs)
     ];
+
+    for (bool found in foundEasterEggs) {
+      data.add(found);
+    }
 
     // make all text fields strings and sterilize them
     int index;
@@ -237,20 +238,20 @@ class ScoutingAppState extends State<ScoutingApp> {
       }
     }
 
-    // ignore: avoid_print
-    print("Sending data $data");
+    debugPrint("current data $data");
 
     return data;
   }
 
-  static bool dataInvalid() {
-    if (nameController.text == "test") {
+  // TODO: should be somewhat stable, but should still really not be hardcoded
+  static bool dataInvalid(List<dynamic> data) {
+    if (data[0] == "test") {
       return false;
     } else {
-      return nameController.text.isEmpty ||
-          matchController.text.isEmpty ||
-          teamController.text.isEmpty ||
-          robotPosition.isEmpty;
+      return data.length < 4 || data[0].isEmpty ||
+          data[1].isEmpty ||
+          data[2].isEmpty ||
+          data[3].isEmpty;
     }
   }
 }

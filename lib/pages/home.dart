@@ -126,21 +126,20 @@ class _HomePageState extends State<HomePage> {
                         width: 200,
                         child: CheckmarkButton(
                             isChecked: flipped,
-                            changeState: (value) => {
-                                  setState(() {
-                                    ScoutingAppState.processEasterEgg2();
-                                    if (value != null) {
-                                      flipped = value;
-                                    }
-                                    if (flipped) {
-                                      fieldImage = Image.asset(
-                                          "images/field_flipped.png");
-                                    } else {
-                                      fieldImage =
-                                          Image.asset("images/field.png");
-                                    }
-                                  })
-                                },
+                            changeState: (value) {
+                              setState(() {
+                                ScoutingAppState.processEasterEgg2();
+                                if (value != null) {
+                                  flipped = value;
+                                }
+                                if (flipped) {
+                                  fieldImage =
+                                      Image.asset("images/field_flipped.png");
+                                } else {
+                                  fieldImage = Image.asset("images/field.png");
+                                }
+                              });
+                            },
                             checkboxTitle: 'Flip field',
                             checkboxSubtitle: ''))
                   ]),
