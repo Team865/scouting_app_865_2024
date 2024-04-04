@@ -41,6 +41,16 @@ class _TeleopPageState extends State<TeleopPage> {
     });
   }
 
+  void incrementTeleopPassedNotes(int incValue) {
+    setState(() {
+      if (ScoutingAppState.teleopPassedNotes <= 0 && incValue < 0) {
+        ScoutingAppState.teleopPassedNotes = 0;
+        return;
+      }
+      ScoutingAppState.teleopPassedNotes += incValue;
+    });
+  }
+
   void changeTechFoul(bool? newValue) {
     setState(() {
       ScoutingAppState.techFoul = newValue!;
@@ -57,7 +67,7 @@ class _TeleopPageState extends State<TeleopPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text(
+            title: const Text(
               'Teleop',
               style: TextStyle(color: Colors.white),
             ),
@@ -79,6 +89,13 @@ class _TeleopPageState extends State<TeleopPage> {
               ScoreCounter(
                 scoreCounter: ScoutingAppState.teleopSpeakerScored,
                 changeValue: incrementTeleopSpeaker,
+              ),  
+              const SizedBox(height: 8),
+              const Text('Passed notes'),
+              const SizedBox(height: 8),
+              ScoreCounter(
+                scoreCounter: ScoutingAppState.teleopPassedNotes,
+                changeValue: incrementTeleopPassedNotes,
               ),
               const SizedBox(height: 8),
               Row(

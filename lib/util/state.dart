@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:flutter/material.dart';
 
 import 'package:scouting_app_865_2024/main.dart';
@@ -47,8 +49,10 @@ class ScoutingAppState extends State<ScoutingApp> {
   static int teleopAmpScored = 0;
   static int teleopSpeakerScored = 0;
   static bool teleopDefense = false;
+  static int teleopPassedNotes = 0;
   static bool techFoul = false;
   static bool foul = false;
+
   //endgame
   static bool climb = false;
   static bool park = false;
@@ -169,6 +173,7 @@ class ScoutingAppState extends State<ScoutingApp> {
     teleopAmpScored = 0;
     teleopSpeakerScored = 0;
     teleopDefense = false;
+    teleopPassedNotes = 0;
     techFoul = false;
     foul = false;
 
@@ -214,6 +219,7 @@ class ScoutingAppState extends State<ScoutingApp> {
       teleopAmpScored,
       teleopSpeakerScored,
       teleopDefense,
+      teleopPassedNotes,
       techFoul,
       foul,
       climb,
@@ -222,9 +228,7 @@ class ScoutingAppState extends State<ScoutingApp> {
       boolsToInt(foundEasterEggs)
     ];
 
-    for (bool found in foundEasterEggs) {
-      data.add(found);
-    }
+    data.addAll(foundEasterEggs);
 
     // make all text fields strings and sterilize them
     int index;
@@ -245,13 +249,15 @@ class ScoutingAppState extends State<ScoutingApp> {
 
   // TODO: should be somewhat stable, but should still really not be hardcoded
   static bool dataInvalid(List<dynamic> data) {
-    if (data[0] == "test") {
+    if (data[0].toString().toLowerCase().substring(0, 4) == "test") {
       return false;
     } else {
-      return data.length < 4 || data[0].isEmpty ||
-          data[1].isEmpty ||
-          data[2].isEmpty ||
-          data[3].isEmpty;
+      return data.length < 5 ||
+          data[0].isEmpty || // name
+          data[1].isEmpty || // team
+          data[2].isEmpty || // match
+          data[3].isEmpty || // position
+          data[4].isEmpty; // comments
     }
   }
 }
