@@ -85,6 +85,7 @@ class _SubmissionState extends State<SubmissionPage> {
         valueListenable: qrData,
         builder: (context, value, child) {
           if (!ScoutingAppState.dataInvalid(ScoutingAppState.getData())) {
+            updateQrCode();
             return QrImageView(
                 data: qrData.value,
                 version: QrVersions.auto,
