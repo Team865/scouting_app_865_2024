@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 
 import 'package:scouting_app_865_2024/main.dart';
@@ -228,7 +226,7 @@ class ScoutingAppState extends State<ScoutingApp> {
       boolsToInt(foundEasterEggs)
     ];
 
-    data.addAll(foundEasterEggs);
+    data.addAll(easterEggCounts);
 
     // make all text fields strings and sterilize them
     int index;
@@ -249,15 +247,14 @@ class ScoutingAppState extends State<ScoutingApp> {
 
   // TODO: should be somewhat stable, but should still really not be hardcoded
   static bool dataInvalid(List<dynamic> data) {
-    if (data[0].toString().toLowerCase().substring(0, 4) == "test") {
+    if (data[0].toString().length >= 4 && data[0].toString().toLowerCase().substring(0, 4) == "test") {
       return false;
     } else {
       return data.length < 5 ||
           data[0].isEmpty || // name
           data[1].isEmpty || // team
           data[2].isEmpty || // match
-          data[3].isEmpty || // position
-          data[4].isEmpty; // comments
+          data[3].isEmpty; // position
     }
   }
 }

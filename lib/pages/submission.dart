@@ -213,6 +213,7 @@ class _SubmissionState extends State<SubmissionPage> {
                           checkboxTitle: "QR scanner",
                           checkboxSubtitle: ""))
                 ]),
+                const Text("You have to press update QR code if you put any comments"),
                 ValueListenableBuilder(
                     valueListenable: showScanner,
                     builder: (context, value, child) {
