@@ -1,4 +1,5 @@
 import 'package:gsheets/gsheets.dart';
+import 'package:scouting_app_865_2024/util/state.dart';
 
 class GSheetsUtil {
   static const _credentials = {
@@ -21,15 +22,21 @@ class GSheetsUtil {
   static const _spreadsheetId = '1ezBwSX63XEl19HrrPjG4Om8JQvH89rdPQQB7Dpo1RkU';
   static final _gsheets = GSheets(_credentials);
   static Worksheet? _matchesSheet;
+  static Worksheet? _testSheet;
 
   static Future init() async {
     final spreadsheet = await _gsheets.spreadsheet(_spreadsheetId);
     _matchesSheet = await _getWorkSheet(spreadsheet, title: "Raw Data");
+    _testSheet = await _getWorkSheet(spreadsheet, title: "Test Data");
   }
 
   static Future<bool> addRow(List<dynamic> matchData) async {
-    if (_matchesSheet == null || matchData.isEmpty) return false;
-    return _matchesSheet!.values.appendRow(matchData);
+    if (_matchesSheet == null || _testSheet == null || matchData.isEmpty) return false;
+    if (ScoutingAppState.nameController.text == "test") {
+      return _testSheet!.values.appendRow(matchData);
+    } else {
+      return _matchesSheet!.values.appendRow(matchData);
+    }
   }
 
   static Future<Worksheet> _getWorkSheet(

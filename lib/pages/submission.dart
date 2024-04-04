@@ -18,6 +18,10 @@ class _SubmissionState extends State<SubmissionPage> {
   final qrData = ValueNotifier("");
   final showScanner = ValueNotifier(false);
 
+  BuildContext getParentContext() {
+    return context.findAncestorStateOfType<ScoutingAppState>()!.context;
+  }
+
   void sendData(List<dynamic> data) {
     bool isConfirmed = false;
     int easterEggs = data[data.length -
@@ -55,8 +59,42 @@ class _SubmissionState extends State<SubmissionPage> {
                           isConfirmed = true;
                         });
 
+                        // thank Lord Franzen this atrocious code works
                         if (isConfirmed) {
-                          GSheetsUtil.addRow(data);
+                          GSheetsUtil.addRow(data).then((success) {
+                            String text =
+                                success ? "Data sent" : "Data failed to send";
+                            //if (context.mounted) {
+                            showDialog(
+                                context: getParentContext(),
+                                builder: (context) {
+                                  return AlertDialog(
+                                      title: const Text("Data submission"),
+                                      content: Text(text),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context, "OK"),
+                                            child: const Text("OK"))
+                                      ]);
+                                });
+                            //}
+                          }).catchError((error) {
+                            showDialog(
+                                context: getParentContext(),
+                                builder: (context) {
+                                  return AlertDialog(
+                                      title:
+                                          const Text("Data submission error"),
+                                      content: Text(error.toString()),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context, "OK"),
+                                            child: const Text("OK"))
+                                      ]);
+                                });
+                          });
                         }
                       },
                       child: const Text('OK'))
@@ -93,7 +131,8 @@ class _SubmissionState extends State<SubmissionPage> {
                 gapless: false,
                 backgroundColor: const Color.fromARGB(255, 255, 255, 255));
           } else {
-            return const Text("Press Update QR code when you're done (and any time you change the data)");
+            return const Text(
+                "Press Update QR code when you're done (and any time you change the data)");
           }
         });
   }
