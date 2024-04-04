@@ -20,7 +20,9 @@ class _SubmissionState extends State<SubmissionPage> {
 
   void sendData(List<dynamic> data) {
     bool isConfirmed = false;
-    int easterEggs = data[data.length - ScoutingAppState.numberOfEasterEggs - 1]; // TODO: bounds checking
+    int easterEggs = data[data.length -
+        ScoutingAppState.numberOfEasterEggs -
+        1]; // TODO: bounds checking
     String easterEgg =
         easterEggs > 0 ? " (you found $easterEggs easter egg(s)!)" : "";
     showDialog(
@@ -82,12 +84,16 @@ class _SubmissionState extends State<SubmissionPage> {
     return ValueListenableBuilder(
         valueListenable: qrData,
         builder: (context, value, child) {
-          return QrImageView(
-              data: qrData.value,
-              version: QrVersions.auto,
-              size: 300,
-              gapless: false,
-              backgroundColor: const Color.fromARGB(255, 255, 255, 255));
+          if (!ScoutingAppState.dataInvalid(ScoutingAppState.getData())) {
+            return QrImageView(
+                data: qrData.value,
+                version: QrVersions.auto,
+                size: 300,
+                gapless: false,
+                backgroundColor: const Color.fromARGB(255, 255, 255, 255));
+          } else {
+            return const Text("Press Update QR code when you're done (and any time you change the data)");
+          }
         });
   }
 
@@ -114,66 +120,67 @@ class _SubmissionState extends State<SubmissionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Submission',
-          style: TextStyle(color: Colors.white),
+        appBar: AppBar(
+          title: const Text(
+            'Submission',
+            style: TextStyle(color: Colors.white),
+          ),
+          centerTitle: true,
+          backgroundColor: lightTheme.colorScheme.primary,
         ),
-        centerTitle: true,
-        backgroundColor: lightTheme.colorScheme.primary,
-      ),
-      body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('Comments'),
-            SizedBox(
-                width: 350,
-                child: TextFormField(
-                    controller: ScoutingAppState.commentsController,
-                    keyboardType: TextInputType.text)),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 30.0),
-                child: ElevatedButton(
-                    onPressed: () {
-                      sendData(ScoutingAppState.getData());
-                    },
-                    child: const Text("Send Data")),
-              ),
-            ),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 30.0),
-                child: ElevatedButton(
-                    onPressed: () {
-                      updateQrCode();
-                    },
-                    child: const Text("Update QR code")),
-              ),
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              SizedBox(
-                  width: 200,
-                  child: CheckmarkButton(
-                      isChecked: showScanner.value,
-                      changeState: (value) {
-                        setState(() {
-                          if (value != null) {
-                            showScanner.value = value;
-                          }
-                        });
-                      },
-                      checkboxTitle: "QR scanner",
-                      checkboxSubtitle: ""))
-            ]),
-            ValueListenableBuilder(
-                valueListenable: showScanner,
-                builder: (context, value, child) {
-                  return Center(
-                    child: showScanner.value ? getQrScanner() : getQrCode(),
-                  );
-                }),
-          ]),
-    );
+        body: SingleChildScrollView(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text('Comments'),
+                SizedBox(
+                    width: 350,
+                    child: TextFormField(
+                        controller: ScoutingAppState.commentsController,
+                        keyboardType: TextInputType.text)),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 30.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          sendData(ScoutingAppState.getData());
+                        },
+                        child: const Text("Send Data")),
+                  ),
+                ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 30.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          updateQrCode();
+                        },
+                        child: const Text("Update QR code")),
+                  ),
+                ),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  SizedBox(
+                      width: 200,
+                      child: CheckmarkButton(
+                          isChecked: showScanner.value,
+                          changeState: (value) {
+                            setState(() {
+                              if (value != null) {
+                                showScanner.value = value;
+                              }
+                            });
+                          },
+                          checkboxTitle: "QR scanner",
+                          checkboxSubtitle: ""))
+                ]),
+                ValueListenableBuilder(
+                    valueListenable: showScanner,
+                    builder: (context, value, child) {
+                      return Center(
+                        child: showScanner.value ? getQrScanner() : getQrCode(),
+                      );
+                    }),
+              ]),
+        ));
   }
 }
