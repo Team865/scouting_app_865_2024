@@ -69,8 +69,7 @@ class ScoutingAppState extends State<ScoutingApp> {
   ];
 
   // number of page switches to trigger easter egg
-  static const easterEggTriggerCount =
-      86; // rounded from 86.5 because 865 is too many
+  static const easterEggTriggerCount = 172;
 
   @override
   Widget build(BuildContext context) {
@@ -147,13 +146,12 @@ class ScoutingAppState extends State<ScoutingApp> {
   static void reset(bool keepName) {
     if (!keepName) {
       nameController.clear();
+      robotPosition = '';
     }
 
     matchController.clear();
     teamController.clear();
     commentsController.clear();
-
-    robotPosition = '';
 
     autoAmpScored = 0;
     autoSpeakerScored = 0;
@@ -253,7 +251,8 @@ class ScoutingAppState extends State<ScoutingApp> {
 
   // TODO: should be somewhat stable, but should still really not be hardcoded
   static bool dataInvalid(List<dynamic> data) {
-    if (data[0].toString().length >= 4 && data[0].toString().toLowerCase().substring(0, 4) == "test") {
+    if (data[0].toString().length >= 4 &&
+        data[0].toString().toLowerCase().substring(0, 4) == "test") {
       return false;
     } else {
       return data.length < 5 ||
