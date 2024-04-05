@@ -89,7 +89,7 @@ class _TeleopPageState extends State<TeleopPage> {
               ScoreCounter(
                 scoreCounter: ScoutingAppState.teleopSpeakerScored,
                 changeValue: incrementTeleopSpeaker,
-              ),  
+              ),
               const SizedBox(height: 8),
               const Text('Passed notes'),
               const SizedBox(height: 8),
@@ -97,6 +97,25 @@ class _TeleopPageState extends State<TeleopPage> {
                 scoreCounter: ScoutingAppState.teleopPassedNotes,
                 changeValue: incrementTeleopPassedNotes,
               ),
+              const SizedBox(height: 8),
+              const Text("Passing effectiveness"),
+              Slider(
+                  value: ScoutingAppState.teleopPassingEffectiveness.toDouble(),
+                  onChanged: (value) => setState(() {
+                        ScoutingAppState.teleopPassingEffectiveness =
+                            value.floor();
+                      }),
+                  min: 0,
+                  max: 9),
+              const SizedBox(height: 8),
+              const Text("Driver skill"),
+              Slider(
+                  value: ScoutingAppState.teleopDriverSkill.toDouble(),
+                  onChanged: (value) => setState(() {
+                        ScoutingAppState.teleopDriverSkill = value.floor();
+                      }),
+                  min: 0,
+                  max: 9),
               const SizedBox(height: 8),
               Row(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -48,6 +48,8 @@ class ScoutingAppState extends State<ScoutingApp> {
   static int teleopSpeakerScored = 0;
   static bool teleopDefense = false;
   static int teleopPassedNotes = 0;
+  static int teleopPassingEffectiveness = 0;
+  static int teleopDriverSkill = 0;
   static bool techFoul = false;
   static bool foul = false;
 
@@ -172,6 +174,8 @@ class ScoutingAppState extends State<ScoutingApp> {
     teleopSpeakerScored = 0;
     teleopDefense = false;
     teleopPassedNotes = 0;
+    teleopPassingEffectiveness = 0;
+    teleopDriverSkill = 0;
     techFoul = false;
     foul = false;
 
@@ -218,6 +222,8 @@ class ScoutingAppState extends State<ScoutingApp> {
       teleopSpeakerScored,
       teleopDefense,
       teleopPassedNotes,
+      teleopPassingEffectiveness + 1,
+      teleopDriverSkill + 1,
       techFoul,
       foul,
       climb,
